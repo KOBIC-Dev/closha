@@ -1,0 +1,67 @@
+include "bioexpress.channel.model.parameter.thrift.idl"
+
+namespace java org.kobic.bioexpress.model.program
+
+/**
+ *  bool        Boolean, one byte
+ *  byte        Signed byte
+ *  i16         Signed 16-bit integer
+ *  i32         Signed 32-bit integer
+ *  i64         Signed 64-bit integer
+ *  double      64-bit floating point value
+ *  string      String
+ *  map<t1,t2>  Map from one type to another
+ *  list<t1>    Ordered list of one type
+ *  set<t1>     Set of unique elements of one type
+ *
+ */
+
+typedef i32 int, 
+typedef i64 long
+typedef bool boolean
+
+typedef bioexpress.channel.model.parameter.thrift.ParameterModel ParameterModel
+
+struct ProgramDataModel{
+	1:string rawID = "NA";
+	2:string programID = "NA";
+	3:string programName = "NA";
+	4:string programDesc = "NA";
+	5:string keyword = "NA";
+	6:string memberID = "NA";	
+	7:string registrant = "NA";
+	8:string registedDate = "NA";
+	9:string modifiedDate = "NA";
+	10:string rootCategoryID = "NA";
+	11:string rootCategoryName = "NA";
+	12:string subCategoryID = "NA";
+	13:string subCategoryName = "NA";
+	14:string scriptPath = "NA";
+	15:string scriptType = "NA";
+	16:string url = "NA";
+	17:string version = "NA";
+	18:string env = "NA"	
+	19:string status = "wait";
+	20:string coreNum = "NA";
+	21:string message = "NA";
+	22:string reason = "NA";
+	23:string key = "NA";
+	24:string icon = "NA";
+	25:string registCode = "PR-REG-0010";
+	26:boolean isPublic = false;
+	27:boolean isMultiCore = false;
+	28:boolean isDelete = false;
+	
+	29:string podmanID = "NA";
+    30:string podmanImgID = "NA";
+    31:string podmanRepo = "NA";
+	32:string podmanTag = "NA";
+	33:string podmanName = "NA";
+}
+
+struct ProgramModel{
+	1:string rawID = "NA";
+	2:ProgramDataModel programData;
+	3:ParameterModel parameter;
+	4:list<ProgramDataModel> relationProgram;
+}

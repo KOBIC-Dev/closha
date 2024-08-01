@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration
+	xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<appender name="console"
+		class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%t>%d{yyyy-MM-dd HH:mm:ss} %p [@%C =>> %M():%L line] - %m%n" />
+		</layout>
+	</appender>
+
+	<appender class="org.apache.log4j.DailyRollingFileAppender"
+		name="dailyout">
+		<param name="file" value="./log/bioexpress.channel.log" />
+		<param name="Append" value="true" />
+		<param name="DatePattern" value=".yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%t>%d{yyyy-MM-dd HH:mm:ss} %p [@%C =>> %M():%L line] - %m%n" />
+		</layout>
+	</appender>
+
+	<appender class="org.apache.log4j.RollingFileAppender"
+		name="rolling">
+		        
+		<param name="file" value="./log/bioexpress.channel.log" />
+		<param name="Append" value="true" />
+		<param name="MaxFileSize" value="10000kb" />
+		        
+		<param name="MaxBackupIndex" value="1" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%t> [%d{yyyy-MM-dd HH:mm:ss}] [%c{1}] [%L] [%p] %m %n" />
+		</layout>
+	</appender>
+
+	<logger name="java.sql">
+		<level value="debug" />
+	</logger>
+
+	<logger name="org.kobic">
+		<level value="info" />
+	</logger>
+
+	<root>
+		<priority value="WARN" />
+		<appender-ref ref="console" />
+		<appender-ref ref="dailyout" />
+	</root>
+
+	<logger name="jdbc.connection" additivity="false">
+		<level value="WARN" />
+		<appender-ref ref="console" />
+	</logger>
+
+	<logger name="jdbc.audit" additivity="false">
+		<level value="WARN" />
+		<appender-ref ref="console" />
+	</logger>
+
+	<logger name="jdbc.sqlonly" additivity="false">
+		<level value="WARN" />
+		<appender-ref ref="console" />
+	</logger>
+
+	<logger name="jdbc.sqltiming" additivity="false">
+		<level value="INFO" />
+		<appender-ref ref="console" />
+	</logger>
+
+	<logger name="jdbc.resultset" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="console" />
+	</logger>
+
+	<logger name="jdbc.resultsettable" additivity="false">
+		<level value="DEBUG" />
+		<appender-ref ref="console" />
+	</logger>
+
+</log4j:configuration>

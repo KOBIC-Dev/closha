@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.kobic.bioexpress.db.dto.pipeline.PipelineDto">
+
+	<parameterMap type="org.kobic.bioexpress.model.pipeline.PipelineDataModel" id="pipeline_data_model"></parameterMap>
+	
+	<resultMap id="pipeline_data_result_map" type="org.kobic.bioexpress.model.pipeline.PipelineDataModel">
+		<result property="rawID" 			column="rawID" />
+		<result property="pipelineID" 		column="pipelineID" />
+		<result property="pipelineName" 	column="pipelineName" />
+		<result property="pipelineDesc" 	column="pipelineDesc" />
+		<result property="keyword" 			column="keyword" />
+		<result property="owner" 			column="owner" />
+		<result property="registrant" 		column="registrant" />
+		<result property="createDate" 		column="createDate" />
+		<result property="updateDate"		column="updateDate" />
+		<result property="deleteDate"		column="deleteDate" />
+		<result property="version" 			column="version" />
+		<result property="categoryID" 		column="categoryID" />
+		<result property="categoryName" 	column="categoryName" />
+		<result property="workspaceID" 		column="workspaceID" />
+		<result property="workspaceName" 	column="workspaceName" />
+		<result property="status" 			column="status" />
+		<result property="reference" 		column="reference" />
+		<result property="pipelineTemplate"	column="pipelineTemplate" />
+		<result property="bpmTemplate" 		column="bpmTemplate" />
+		<result property="message" 			column="message" />
+		<result property="reason" 			column="reason" />
+		<result property="exeCount" 		column="exeCount" />
+		<result property="registCode" 		column="registCode" />
+		<result property="isPublic" 		column="isPublic"   javaType="java.lang.Boolean" jdbcType="VARCHAR" typeHandler="org.kobic.bioexpress.db.handler.ConvertTypeHandler"/>
+		<result property="isDelete" 		column="isDelete"   javaType="java.lang.Boolean" jdbcType="VARCHAR" typeHandler="org.kobic.bioexpress.db.handler.ConvertTypeHandler"/>
+		<result property="isShared" 		column="isShared"   javaType="java.lang.Boolean" jdbcType="VARCHAR" typeHandler="org.kobic.bioexpress.db.handler.ConvertTypeHandler"/>
+		<result property="isInstance" 		column="isInstance" javaType="java.lang.Boolean" jdbcType="VARCHAR" typeHandler="org.kobic.bioexpress.db.handler.ConvertTypeHandler"/>
+	</resultMap>
+
+	<select id="getPipelineTotalCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) 
+		FROM BX_PIPELINE_TABLE 
+		WHERE "isDelete" = 'false'
+	</select>
+	
+	<select id="getPipelineAllTotalCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) 
+		FROM BX_PIPELINE_TABLE
+	</select>
+	
+	<select id="getAllPipeline" resultMap="pipeline_data_result_map">
+		SELECT * FROM BX_PIPELINE_TABLE
+	</select>
+		
+	<select id="getTotalPipeline" resultMap="pipeline_data_result_map" parameterType="map">
+		SELECT * 
+		FROM BX_PIPELINE_TABLE
+		WHERE "isDelete" = 'false'
+		ORDER BY "createDate" DESC 
+		<if test="range != null and !range.equals('') and start != null and !start.equals('')">
+		LIMIT #{range, jdbcType=INTEGER} OFFSET #{start, jdbcType=INTEGER}
+		</if>
+	</select>	
+		
+	<select id="getPipelineDataOfWorkspaceTotalCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) 
+		FROM BX_PIPELINE_TABLE 
+		WHERE "owner" = #{memberID} AND "workspaceID" = #{workspaceID} AND "isDelete" = 'false' 
+	</select>
+		
+	<select id="getPipelineDataOfWorkspace" resultMap="pipeline_data_result_map" parameterType="map">
+		SELECT * 
+		FROM BX_PIPELINE_TABLE
+		WHERE "owner" = #{memberID} AND "workspaceID" = #{workspaceID} AND "isDelete" = 'false' 
+		ORDER BY "createDate" DESC
+		<if test="range != null and !range.equals('') and start != null and !start.equals('')">
+		LIMIT #{range, jdbcType=INTEGER} OFFSET #{start, jdbcType=INTEGER}
+		</if>
+	</select>
+	
+	<select id="getPipelinDataOfCetegory" resultMap="pipeline_data_result_map" parameterType="string">
+		SELECT * 
+		FROM BX_PIPELINE_TABLE 
+		WHERE "categoryID" = #{categoryID} AND "isDelete" = 'false' AND "isPublic" = 'true'
+	</select>
+	
+	<select id="getPipelineCountOfCategory" resultType="java.lang.Integer" parameterType="string">
+		SELECT COUNT(*) 
+		FROM BX_PIPELINE_TABLE 
+		WHERE "categoryID" = #{categoryID} AND "isDelete" = 'false'
+	</select>
+	
+	<select id="getPublicPipelineDataTotalCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) 
+		FROM BX_PIPELINE_TABLE 
+		WHERE "isDelete" = 'false' AND "isPublic" = 'true'
+	</select>
+	
+	<select id="getPublicPipelineData" resultMap="pipeline_data_result_map">
+		SELECT * 
+		FROM BX_PIPELINE_TABLE 
+		WHERE "isDelete" = 'false' AND "isPublic" = 'true'
+		ORDER BY "createDate" DESC
+	</select>
+		
+	<select id="getSharePipelineTotalCount" resultType="java.lang.Integer" parameterType="map">
+		SELECT COUNT(*) 
+		FROM BX_PIPELINE_TABLE 
+		WHERE "isShared" = 'true' AND "isDelete" = 'false'
+		<if test="memberID != null and !memberID.equals('')">
+		AND "owner" = #{memberID}
+		</if>
+	</select>
+		
+	<select id="getSharePipelineList" resultMap="pipeline_data_result_map" parameterType="map">
+		SELECT * 
+		FROM BX_PIPELINE_TABLE 
+		WHERE "isShared" = 'true' AND "isDelete" = 'false'
+		<if test="memberID != null and !memberID.equals('')">
+		AND "owner" = #{memberID}
+		</if>
+		<if test="range != null and !range.equals('') and start != null and !start.equals('')">
+		LIMIT #{range, jdbcType=INTEGER} OFFSET #{start, jdbcType=INTEGER}
+		</if>
+	</select>
+		
+	<select id="getInstancePipelineTotalCount" resultType="java.lang.Integer" parameterType="map">
+		SELECT COUNT(*) 
+		FROM BX_PIPELINE_TABLE 
+		WHERE "isInstance" = 'true' AND "isDelete" = 'false'
+		<if test="memberID != null and !memberID.equals('')">
+		AND "owner" = #{memberID}
+		</if>
+	</select>
+	
+	<select id="getInstancePipelineList" resultMap="pipeline_data_result_map" parameterType="map">
+		SELECT * 
+		FROM BX_PIPELINE_TABLE 
+		WHERE "isInstance" = 'true' AND "isDelete" = 'false'
+		<if test="memberID != null and !memberID.equals('')">
+		AND "owner" = #{memberID}
+		</if>
+		ORDER BY "createDate" DESC
+		<if test="range != null and !range.equals('') and start != null and !start.equals('')">
+		LIMIT #{range, jdbcType=INTEGER} OFFSET #{start, jdbcType=INTEGER}
+		</if>
+	</select>
+		
+	<select id="getDevelopmentPipelineTotalCount" resultType="java.lang.Integer" parameterType="map">
+		SELECT COUNT(*) 
+		FROM BX_PIPELINE_TABLE 
+		WHERE "isInstance" = 'false' AND "isDelete" = 'false'
+		<if test="memberID != null and !memberID.equals('')">
+		AND "owner" = #{memberID}
+		</if>
+	</select>
+		
+	<select id="getDevelopmentPipelineList" resultMap="pipeline_data_result_map">
+		SELECT * 
+		FROM BX_PIPELINE_TABLE 
+		WHERE "isInstance" = 'false' AND "isDelete" = 'false'
+		<if test="memberID != null and !memberID.equals('')">
+		AND "owner" = #{memberID}
+		</if>
+		ORDER BY "createDate" DESC
+		<if test="range != null and !range.equals('') and start != null and !start.equals('')">
+		LIMIT #{range, jdbcType=INTEGER} OFFSET #{start, jdbcType=INTEGER}
+		</if>
+	</select>
+	
+	<select id="getPipelineDataDetailInfoByMember" resultMap="pipeline_data_result_map">
+		SELECT * 
+		FROM BX_PIPELINE_TABLE 
+		WHERE "owner" = #{memberID} AND "rawID" = #{rawID} AND "isDelete" = 'false'
+	</select>
+	
+	<select id="getPipelineDataByPipelineID" resultMap="pipeline_data_result_map">
+		SELECT * 
+		FROM BX_PIPELINE_TABLE 
+		WHERE "pipelineID" = #{pipelineID}
+	</select>
+	
+	<select id="getPipelineDataWithRegistCodeTotalCount" resultType="java.lang.Integer" parameterType="string">
+		SELECT COUNT(*) 
+		FROM BX_PIPELINE_TABLE 
+		WHERE "isDelete" = 'false' AND "registCode" = #{registCode}
+	</select>
+	
+	<select id="getPipelineDataWithRegistCode" resultMap="pipeline_data_result_map" parameterType="map">
+		SELECT * 
+		FROM BX_PIPELINE_TABLE 
+		WHERE "isDelete" = 'false' AND "registCode" = #{registCode}
+		<if test="range != null and !range.equals('') and start != null and !start.equals('')">
+		LIMIT #{range, jdbcType=INTEGER} OFFSET #{start, jdbcType=INTEGER}
+		</if>
+	</select>
+	
+	<select id="getMyPipelineTotalCount" resultType="java.lang.Integer" parameterType="string">
+		SELECT COUNT(*) 
+		FROM BX_PIPELINE_TABLE 
+		WHERE "owner" = #{memberID} AND "isDelete" = 'false'
+	</select>
+		
+	<select id="getMyPipeline" resultMap="pipeline_data_result_map">
+		SELECT * 
+		FROM BX_PIPELINE_TABLE 
+		WHERE "owner" = #{memberID} AND "isDelete" = 'false'
+		<if test="sorting != null and !sorting.equals('')">
+		ORDER BY #{sorting} DESC
+		</if>
+		<if test="range != null and !range.equals('') and start != null and !start.equals('')">
+		LIMIT #{range, jdbcType=INTEGER} OFFSET #{start, jdbcType=INTEGER}
+		</if>
+	</select>
+</mapper>

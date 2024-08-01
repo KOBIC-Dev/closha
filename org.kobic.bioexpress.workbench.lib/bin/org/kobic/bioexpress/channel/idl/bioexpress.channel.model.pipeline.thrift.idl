@@ -1,0 +1,119 @@
+include "bioexpress.channel.model.parameter.thrift.idl"
+
+namespace java org.kobic.bioexpress.model.pipeline
+
+/**
+ *  bool        Boolean, one byte
+ *  byte        Signed byte
+ *  i16         Signed 16-bit integer
+ *  i32         Signed 32-bit integer
+ *  i64         Signed 64-bit integer
+ *  double      64-bit floating point value
+ *  string      String
+ *  map<t1,t2>  Map from one type to another
+ *  list<t1>    Ordered list of one type
+ *  set<t1>     Set of unique elements of one type
+ *
+ */
+
+typedef i32 int, 
+typedef i64 long
+typedef bool boolean
+
+typedef bioexpress.channel.model.parameter.thrift.ParameterModel ParameterModel
+
+struct LinkModel{
+	1:string linkID = "NA";
+	2:string sourceID = "NA";
+	3:string targetID = "NA";
+	4:string sourceName = "NA";
+	5:string targetName = "NA";
+	6:string sourceParamName = "NA";
+	7:string targetParamName = "NA";
+	8:string sourceParamID = "NA";
+	9:string targetParamID = "NA";
+}
+
+struct NodeModel{
+	1:string rawID = "NA";
+	2:string nodeID = "NA";
+	3:NodeDataModel nodeData;
+	4:ParameterModel parameter;
+}
+
+struct NodeDataModel{
+	1:string programID = "NA";
+	2:string programName = "NA";
+	3:string programDesc = "NA";
+	4:string keyword = "NA";
+	5:string registrantID = "NA";
+	6:string registedDate = "NA";
+	7:string modifiedDate = "NA";
+	8:string categoryID = "NA";
+	9:string categoryName = "NA";
+	10:string nodeName = "NA";
+	11:string scriptPath = "NA";
+	12:string scriptType = "NA";
+	13:string url = "NA";
+	14:string version = "NA";
+	15:string env = "NA";
+	16:string status = "wait";
+	17:string coreNum = "NA";
+	18:string icon = "NA";
+	19:boolean Public = false;
+	20:boolean MultiCore = false;
+	21:boolean Start = false;
+	22:boolean End = false;
+	23:int x = 0;
+	24:int y = 0;
+	
+	25:string podmanID = "NA";
+    26:string podmanImgID = "NA";
+    27:string podmanRepo = "NA";
+	28:string podmanTag = "NA";
+	29:string podmanName = "NA";
+}
+
+struct ShareModel{
+	1:string memberID = "NA";
+	2:string memberName = "NA";
+	3:string email = "NA";
+}
+
+struct PipelineDataModel{
+	1:string rawID = "NA";
+	2:string pipelineID = "NA";
+	3:string pipelineName = "NA";
+	4:string pipelineDesc = "NA";
+	5:string keyword = "NA";
+	6:string owner = "NA";
+	7:string registrant = "NA";
+	8:string createDate = "NA";
+	9:string updateDate = "NA";
+	10:string deleteDate = "NA";
+	11:string version = "NA";
+	12:string categoryID = "NA";
+	13:string categoryName = "NA";
+	14:string workspaceID = "NA";
+	15:string workspaceName = "NA";
+	16:string status = "wait";
+	17:string reference = "NA";
+	18:string pipelineTemplate = "NA";
+	19:string bpmTemplate = "NA";
+	20:string message = "NA";
+	21:string reason = "NA";
+	22:string exeCount = "0";
+	23:string registCode = "PI-REG-0010";
+	24:boolean isPublic = false;
+	25:boolean isDelete = false;
+	26:boolean isShared = false;
+	27:boolean isInstance = false;
+}
+
+struct PipelineModel{
+	1:string rawID;
+	2:PipelineDataModel pipelineData;
+	3:list<NodeModel> node;
+	4:list<LinkModel> link;
+	5:list<ShareModel> share;
+}

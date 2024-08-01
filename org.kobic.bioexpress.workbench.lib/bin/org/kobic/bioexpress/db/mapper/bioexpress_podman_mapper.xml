@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.kobic.bioexpress.db.dto.podman.PodmanDto">
+
+	<parameterMap
+		type="org.kobic.bioexpress.model.podman.PodmanModel" id="podman"></parameterMap>
+
+	<resultMap id="podman_model"
+		type="org.kobic.bioexpress.model.podman.PodmanModel">
+		<result property="rawID" column="RAW_ID" />
+		<result property="podmanID" column="PODMAN_ID" />
+		<result property="imageID" column="IMAGE_ID" />
+		<result property="name" column="NAME" />
+		<result property="repo" column="REPO" />
+		<result property="tag" column="TAG" />
+		<result property="description" column="DESCRIPTION" />
+		<result property="savePath" column="SAVE_PATH" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="modifyDate" column="MODIFY_DATE" />
+		<result property="memberID" column="MEMBER_ID" />
+		<result property="podmanType" column="PODMAN_TYPE" />
+		<result property="status" column="STATUS" />
+		<result property="timeStamp" column="TIMESTAMP" />
+		<result property="isDelete" column="IS_DELETE" />
+		<result property="isOfficial" column="IS_OFFICIAL" />
+	</resultMap>
+
+	<insert id="insertPodman" parameterMap="podman">
+		UPSERT INTO
+		BX_PODMAN_TABLE(
+		RAW_ID, PODMAN_ID, IMAGE_ID,
+		NAME, REPO, TAG,
+		DESCRIPTION,
+		SAVE_PATH,
+		CREATE_DATE, MODIFY_DATE,
+		MEMBER_ID, PODMAN_TYPE,
+		STATUS,
+		TIMESTAMP,
+		IS_DELETE,
+		IS_OFFICIAL
+		)
+		VALUES(
+		#{rawID}, #{podmanID},
+		#{imageID},
+		#{name}, #{repo}, #{tag},
+		#{description},
+		#{savePath},
+		#{createDate},
+		#{modifyDate},
+		#{memberID},
+		#{podmanType}, #{status},
+		#{timeStamp},
+		#{isDelete}, #{isOfficial}
+		)
+	</insert>
+
+	<select id="getAllPodman" resultMap="podman_model"
+		parameterType="map">
+		SELECT * FROM
+		BX_PODMAN_TABLE
+		WHERE "IS_DELETE" = false
+	</select>
+
+	<select id="getAllPodmanTotalCount"
+		resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM BX_PODMAN_TABLE
+		WHERE "IS_DELETE" =
+		false
+	</select>
+
+	<select id="getOfficialPodman" resultMap="podman_model">
+		SELECT *
+		FROM
+		BX_PODMAN_TABLE
+		WHERE "IS_DELETE" = false
+		AND "IS_OFFICIAL" = true
+	</select>
+
+	<select id="getUserPodman" resultMap="podman_model"
+		parameterType="map">
+		SELECT *
+		FROM
+		BX_PODMAN_TABLE
+		WHERE "IS_DELETE" = false
+		AND "MEMBER_ID" =
+		#{memberID}
+		<if
+			test="range != null and !range.equals('') and start != null and !start.equals('')">
+			LIMIT #{range, jdbcType=INTEGER} OFFSET #{start,
+			jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<select id="podmanIsExist" resultMap="podman_model"
+		parameterType="map">
+		SELECT *
+		FROM
+		BX_PODMAN_TABLE
+		WHERE "IS_DELETE" = false
+		AND
+		"MEMBER_ID" =
+		#{memberID}
+		AND "NAME" =
+		#{name}
+		AND "TAG" =
+		#{tag}
+	</select>
+
+	<select id="getUserPodmanTotalCount"
+		resultType="java.lang.Integer" parameterType="java.lang.String">
+		SELECT COUNT(*)
+		FROM
+		BX_PODMAN_TABLE
+		WHERE "IS_DELETE" = false
+		AND "MEMBER_ID" = #{memberID}
+	</select>
+
+	<select id="getSelectPodman" resultMap="podman_model"
+		parameterType="java.lang.String">
+		SELECT *
+		FROM
+		BX_PODMAN_TABLE
+		WHERE "RAW_ID" =
+		#{rawID}
+	</select>
+
+	<insert id="deletePodman" parameterType="map">
+		UPSERT INTO
+		BX_PODMAN_TABLE(
+		RAW_ID, IS_DELETE
+		)
+		VALUES(
+		#{rawID}, #{isDelete}
+		)
+	</insert>
+
+	<insert id="updatePodman" parameterMap="podman">
+		UPSERT INTO
+		BX_PODMAN_TABLE(
+		RAW_ID, PODMAN_ID, IMAGE_ID,
+		NAME, REPO, TAG,
+		DESCRIPTION,
+		SAVE_PATH,
+		CREATE_DATE, MODIFY_DATE,
+		MEMBER_ID, PODMAN_TYPE,
+		STATUS,
+		TIMESTAMP,
+		IS_DELETE,
+		IS_OFFICIAL
+		)
+		VALUES(
+		#{rawID}, #{podmanID},
+		#{imageID},
+		#{name}, #{tag},
+		#{description},
+		#{savePath},
+		#{createDate},
+		#{modifyDate},
+		#{memberID},
+		#{podmanType}, #{status},
+		#{timeStamp},
+		#{isDelete}, #{isOfficial}
+		)
+	</insert>
+
+	<update id="updatePodmanStatus" parameterType="map">
+		UPSERT INTO
+		BX_PODMAN_TABLE(
+		RAW_ID, STATUS
+		)
+		VALUES(
+		#{rawID}, #{status}
+		)
+	</update>
+
+</mapper>

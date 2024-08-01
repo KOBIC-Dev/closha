@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.kobic.bioexpress.db.dto.category.CategoryDto">
+
+	<parameterMap type="org.kobic.bioexpress.model.category.CategoryModel" id="category"></parameterMap>
+	
+	<resultMap id="category_model" type="org.kobic.bioexpress.model.category.CategoryModel">
+		<result property="rawID" 		        column="RAW_ID" />
+		<result property="categoryID" 	        column="CATEGORY_ID" />
+		<result property="categoryName" 	    column="CATEGORY_NAME" />
+		<result property="categoryDesc" 	    column="CATEGORY_DESC" />
+		<result property="parentID" 	        column="PARENT_ID" />
+		<result property="memberID" 		    column="MEMBER_ID" />
+		<result property="createDate" 	        column="CREATE_DATE" />
+		<result property="updateDate" 			column="UPDATE_DATE" />
+		<result property="deleteDate"           column="DELETE_DATE" />
+		<result property="objectCount"          column="OBJECT_COUNT" />
+		<result property="isRoot" 	            column="IS_ROOT" />
+		<result property="isPublic" 		    column="IS_PUBLIC" />
+		<result property="isAdmin" 	            column="IS_ADMIN" />
+		<result property="isDelete" 		    column="IS_DELETE" />
+		<result property="isPipeline" 		    column="IS_PIPELINE" />
+		<result property="isProgram" 	        column="IS_PROGRAM" />
+	</resultMap>
+	
+	<resultMap id="category_pipeline_model" type="org.kobic.bioexpress.model.category.CategoryModel">
+		<result property="rawID" 		        column="c.RAW_ID" />
+		<result property="categoryID" 	        column="c.CATEGORY_ID" />
+		<result property="categoryName" 	    column="c.CATEGORY_NAME" />
+		<result property="categoryDesc" 	    column="c.CATEGORY_DESC" />
+		<result property="parentID" 	        column="c.PARENT_ID" />
+		<result property="memberID" 		    column="c.MEMBER_ID" />
+		<result property="createDate" 	        column="c.CREATE_DATE" />
+		<result property="updateDate" 			column="c.UPDATE_DATE" />
+		<result property="deleteDate"           column="c.DELETE_DATE" />
+		<result property="objectCount"          column="p.OBJECT_COUNT" />
+		<result property="isRoot" 	            column="c.IS_ROOT" />
+		<result property="isPublic" 		    column="c.IS_PUBLIC" />
+		<result property="isAdmin" 	            column="c.IS_ADMIN" />
+		<result property="isDelete" 		    column="c.IS_DELETE" />
+		<result property="isPipeline" 		    column="c.IS_PIPELINE" />
+		<result property="isProgram" 	        column="c.IS_PROGRAM" />
+	</resultMap>
+	
+	<resultMap id="category_program_model" type="org.kobic.bioexpress.model.category.CategoryModel">
+		<result property="rawID" 		        column="c.RAW_ID" />
+		<result property="categoryID" 	        column="c.CATEGORY_ID" />
+		<result property="categoryName" 	    column="c.CATEGORY_NAME" />
+		<result property="categoryDesc" 	    column="c.CATEGORY_DESC" />
+		<result property="parentID" 	        column="c.PARENT_ID" />
+		<result property="memberID" 		    column="c.MEMBER_ID" />
+		<result property="createDate" 	        column="c.CREATE_DATE" />
+		<result property="updateDate" 			column="c.UPDATE_DATE" />
+		<result property="deleteDate"           column="c.DELETE_DATE" />
+		<result property="objectCount"          column="p.OBJECT_COUNT" />
+		<result property="isRoot" 	            column="c.IS_ROOT" />
+		<result property="isPublic" 		    column="c.IS_PUBLIC" />
+		<result property="isAdmin" 	            column="c.IS_ADMIN" />
+		<result property="isDelete" 		    column="c.IS_DELETE" />
+		<result property="isPipeline" 		    column="c.IS_PIPELINE" />
+		<result property="isProgram" 	        column="c.IS_PROGRAM" />
+	</resultMap>
+
+	<insert id="insertCategory" parameterMap="category">
+		UPSERT INTO
+			BX_CATEGORY_TABLE(
+				RAW_ID, CATEGORY_ID, CATEGORY_NAME,
+				CATEGORY_DESC, PARENT_ID, MEMBER_ID, 
+				CREATE_DATE, UPDATE_DATE, DELETE_DATE, 
+				IS_ROOT, IS_PUBLIC, IS_ADMIN, IS_DELETE,
+				IS_PIPELINE, IS_PROGRAM
+			)
+			VALUES(
+				#{rawID}, #{categoryID}, #{categoryName}, 
+				#{categoryDesc}, #{parentID}, #{memberID},
+				#{createDate}, #{updateDate}, 
+				#{deleteDate}, #{isRoot}, #{isPublic},
+				#{isAdmin}, #{isDelete},
+				#{isPipeline}, #{isProgram}
+			)
+	</insert>
+	
+	<insert id="updateCategory" parameterType="map">
+		UPSERT INTO
+			BX_CATEGORY_TABLE(
+				RAW_ID, CATEGORY_NAME, CATEGORY_DESC,
+				IS_PUBLIC, UPDATE_DATE
+			)
+			VALUES(
+				#{rawID}, #{categoryName}, #{categoryDesc},
+				#{isPublic}, #{updateDate}
+			)
+	</insert>
+
+	<insert id= "deleteCategory" parameterType="map">
+		UPSERT INTO
+			BX_CATEGORY_TABLE(
+				RAW_ID, DELETE_DATE, IS_DELETE
+			)
+			VALUES(
+				#{rawID}, #{deleteDate}, #{isDelete}
+			)
+	</insert>
+	
+	<select id="getCategoryTotalCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM BX_CATEGORY_TABLE
+	</select>
+	
+	<select id= "getCategory" resultMap="category_model" parameterType="string">
+		SELECT * FROM BX_CATEGORY_TABLE WHERE "RAW_ID" = #{rawID}
+	</select>
+	
+	<select id= "getCategoryWithCategoryID" resultMap="category_model" parameterType="string">
+		SELECT * FROM BX_CATEGORY_TABLE WHERE "CATEGORY_ID" = #{categoryID}
+	</select>
+	
+	<select id= "getPipelineRootCategory" resultMap="category_pipeline_model"  parameterType="map">
+		SELECT c.RAW_ID, c.CATEGORY_ID, c.CATEGORY_NAME, 
+			c.CATEGORY_DESC, c.PARENT_ID, c.MEMBER_ID, c.IS_ROOT, 
+			c.IS_PUBLIC, c.IS_ADMIN, c.IS_DELETE, c.IS_PIPELINE, 
+			c.CREATE_DATE, c.UPDATE_DATE, c.DELETE_DATE,
+			c.IS_PROGRAM, p.OBJECT_COUNT FROM BX_CATEGORY_TABLE c 
+		LEFT JOIN (SELECT PARENT_ID, COUNT(*) AS OBJECT_COUNT FROM BX_CATEGORY_TABLE WHERE IS_DELETE = FALSE GROUP BY PARENT_ID) AS p ON c.CATEGORY_ID = p.PARENT_ID
+		WHERE (
+			<if test="memberID != null and !memberID.equals('')">
+			c.MEMBER_ID = #{memberID} OR 
+			</if>
+			c.IS_PUBLIC = TRUE) AND (c.IS_DELETE = FALSE AND c.IS_PIPELINE = TRUE AND IS_ROOT = TRUE)
+	</select>
+	
+	<select id="getPipelineSubCategory" resultMap="category_pipeline_model"  parameterType="map">
+		SELECT c.RAW_ID, c.CATEGORY_ID, c.CATEGORY_NAME, 
+			c.CATEGORY_DESC, c.PARENT_ID, c.MEMBER_ID, c.IS_ROOT, 
+			c.IS_PUBLIC, c.IS_ADMIN, c.IS_DELETE, c.IS_PIPELINE, 
+			c.CREATE_DATE, c.UPDATE_DATE, c.DELETE_DATE,
+			c.IS_PROGRAM, p.OBJECT_COUNT FROM BX_CATEGORY_TABLE c 
+		LEFT JOIN (SELECT "categoryID", COUNT(*) AS OBJECT_COUNT FROM BX_PIPELINE_TABLE WHERE "isDelete" = 'false' GROUP BY "categoryID") AS p ON c.CATEGORY_ID = p."categoryID"
+		WHERE ((
+			<if test="memberID != null and !memberID.equals('')">
+			c.MEMBER_ID = #{memberID} OR 
+			</if>
+			c.IS_PUBLIC = TRUE) 
+			AND c.PARENT_ID = #{parentID}) 
+		AND (c.IS_DELETE = FALSE AND c.IS_PIPELINE = TRUE AND IS_ROOT = FALSE)
+	</select>
+	
+	<select id="getProgramRootCategory" resultMap="category_program_model"  parameterType="string">
+		SELECT c.RAW_ID, c.CATEGORY_ID, c.CATEGORY_NAME, 
+			c.CATEGORY_DESC, c.PARENT_ID, c.MEMBER_ID, c.IS_ROOT, 
+			c.IS_PUBLIC, c.IS_ADMIN, c.IS_DELETE, c.IS_PIPELINE, 
+			c.CREATE_DATE, c.UPDATE_DATE, c.DELETE_DATE,
+			c.IS_PROGRAM, p.OBJECT_COUNT FROM BX_CATEGORY_TABLE c 
+		LEFT JOIN (SELECT PARENT_ID, COUNT(*) AS OBJECT_COUNT FROM BX_CATEGORY_TABLE WHERE IS_DELETE = FALSE GROUP BY PARENT_ID) AS p ON c.CATEGORY_ID = p.PARENT_ID
+		WHERE (c.MEMBER_ID = #{memberID} OR c.IS_PUBLIC = TRUE) 
+		AND (c.IS_DELETE = FALSE AND c.IS_PROGRAM = TRUE AND IS_ROOT = TRUE)
+	</select>
+	
+	<select id="getProgramSubCategory" resultMap="category_program_model"  parameterType="map">
+		SELECT c.RAW_ID, c.CATEGORY_ID, c.CATEGORY_NAME, 
+			c.CATEGORY_DESC, c.PARENT_ID, c.MEMBER_ID, c.IS_ROOT, 
+			c.IS_PUBLIC, c.IS_ADMIN, c.IS_DELETE, c.IS_PIPELINE, 
+			c.CREATE_DATE, c.UPDATE_DATE, c.DELETE_DATE,
+			c.IS_PROGRAM, p.OBJECT_COUNT FROM BX_CATEGORY_TABLE c 
+		LEFT JOIN (SELECT "subCategoryID", COUNT(*) AS OBJECT_COUNT FROM BX_PROGRAM_TABLE WHERE "isDelete" = 'false' GROUP BY "subCategoryID") AS p ON c.CATEGORY_ID = p."subCategoryID"
+		WHERE ((c.MEMBER_ID = #{memberID} OR c.IS_PUBLIC = TRUE) 
+		AND c.PARENT_ID = #{parentID}) AND (c.IS_DELETE = FALSE AND c.IS_PROGRAM = TRUE AND IS_ROOT = FALSE)
+	</select>
+	
+	<select id="getPublicRootCategory" resultMap="category_program_model"  parameterType="map">
+		SELECT c.RAW_ID, c.CATEGORY_ID, c.CATEGORY_NAME, 
+			c.CATEGORY_DESC, c.PARENT_ID, c.MEMBER_ID, c.IS_ROOT, 
+			c.IS_PUBLIC, c.IS_ADMIN, c.IS_DELETE, c.IS_PIPELINE, 
+			c.CREATE_DATE, c.UPDATE_DATE, c.DELETE_DATE,
+			c.IS_PROGRAM, p.OBJECT_COUNT FROM BX_CATEGORY_TABLE c 
+		LEFT JOIN (SELECT PARENT_ID, COUNT(*) AS OBJECT_COUNT FROM BX_CATEGORY_TABLE WHERE IS_DELETE = FALSE GROUP BY PARENT_ID) AS p ON c.CATEGORY_ID = p.PARENT_ID
+		WHERE c.IS_PUBLIC = TRUE AND c.IS_DELETE = FALSE AND IS_ROOT = TRUE 
+		<choose>
+			<when test="categoryType != null and categoryType.equals('pipeline')">
+				AND c.IS_PIPELINE = TRUE
+			</when>
+			<otherwise>
+				AND c.IS_PROGRAM = TRUE
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="getPublicSubCategory" resultMap="category_pipeline_model"  parameterType="map">
+		SELECT c.RAW_ID, c.CATEGORY_ID, c.CATEGORY_NAME, 
+			c.CATEGORY_DESC, c.PARENT_ID, c.MEMBER_ID, c.IS_ROOT, 
+			c.IS_PUBLIC, c.IS_ADMIN, c.IS_DELETE, c.IS_PIPELINE, 
+			c.CREATE_DATE, c.UPDATE_DATE, c.DELETE_DATE,
+			c.IS_PROGRAM, p.OBJECT_COUNT FROM BX_CATEGORY_TABLE c 
+		LEFT JOIN (SELECT PARENT_ID, COUNT(*) AS OBJECT_COUNT FROM BX_CATEGORY_TABLE WHERE IS_DELETE = FALSE GROUP BY PARENT_ID) AS p ON c.CATEGORY_ID = p.PARENT_ID
+		WHERE c.IS_PUBLIC = TRUE AND c.PARENT_ID = #{parentID} AND c.IS_DELETE = FALSE AND IS_ROOT = FALSE 
+		<choose>
+			<when test="categoryType != null and categoryType.equals('pipeline')">
+				AND c.IS_PIPELINE = TRUE
+			</when>
+			<otherwise>
+				AND c.IS_PROGRAM = TRUE
+			</otherwise>
+		</choose>
+	</select>
+
+</mapper>

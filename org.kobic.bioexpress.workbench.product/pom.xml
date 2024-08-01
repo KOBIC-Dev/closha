@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>org.kobic.bioexpress.workbench.product</artifactId>
+	<packaging>eclipse-repository</packaging>
+
+	<parent>
+		<groupId>org.kobic.bioexpress.workbench</groupId>
+		<artifactId>org.kobic.bioexpress.workbench.parent</artifactId>
+		<version>2.0.0</version>
+		<relativePath>../org.kobic.bioexpress.workbench.parent</relativePath>
+	</parent>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-director-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>create-distributions</id>
+						<goals>
+							<goal>materialize-products</goal>
+							<goal>archive-products</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<products>
+						<product>
+							<id>product</id>
+						</product>
+					</products>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

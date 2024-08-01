@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.kobic.bioexpress.db.dto.script.ScriptDto">
+
+	<parameterMap
+		type="org.kobic.bioexpress.model.script.ScriptModel" id="script_model"></parameterMap>
+
+	<resultMap id="script_result_map"
+		type="org.kobic.bioexpress.model.script.ScriptModel">
+		<result property="rawID" column="RAW_ID" />
+		<result property="scriptID" column="SCRIPT_ID" />
+		<result property="name" column="NAME" />
+		<result property="scriptType" column="SCRIPT_TYPE" />
+		<result property="savePath" column="SAVE_PATH" />
+		<result property="parentPath" column="PARENT_PATH" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="modifyDate" column="MODIFY_DATE" />
+		<result property="memberID" column="MEMBER_ID" />
+		<result property="podmanID" column="PODMAN_ID" />
+		<result property="podmanImgID" column="PODMAN_IMG_ID" />
+		<result property="podmanName" column="PODMAN_NAME" />
+		<result property="podmanRepo" column="PODMAN_REPO" />
+		<result property="podmanTag" column="PODMAN_TAG" />
+		<result property="timeStamp" column="TIMESTAMP" />
+		<result property="isDelete" column="IS_DELETE" />
+	</resultMap>
+
+	<insert id="insertScript" parameterMap="script_model">
+		UPSERT INTO
+		BX_SCRIPT_TABLE(
+		RAW_ID, SCRIPT_ID, NAME,
+		SCRIPT_TYPE, SAVE_PATH,
+		PARENT_PATH,
+		CREATE_DATE, MODIFY_DATE, MEMBER_ID,
+		PODMAN_IMG_ID,
+		PODMAN_ID, PODMAN_NAME, PODMAN_REPO, PODMAN_TAG,
+		TIMESTAMP, IS_DELETE
+		)
+		VALUES(
+		#{rawID}, #{scriptID}, #{name},
+		#{scriptType}, #{savePath},
+		#{parentPath},
+		#{createDate},
+		#{modifyDate}, #{memberID},
+		#{podmanImgID},
+		#{podmanID}, #{podmanName}, #{podmanRepo},
+		#{podmanTag},
+		#{timeStamp},
+		#{isDelete}
+		)
+	</insert>
+
+	<select id="getSelectScript" resultMap="script_result_map"
+		parameterType="map">
+		SELECT *
+		FROM
+		BX_SCRIPT_TABLE
+		WHERE "NAME" = #{name}
+		AND
+		"SAVE_PATH" = #{savePath}
+		AND "MEMBER_ID" = #{memberID}
+		AND "IS_DELETE"
+		!= true
+	</select>
+
+	<select id="getSelectScriptWithPath" resultType="string"
+		parameterType="string">
+		SELECT *
+		FROM
+		BX_SCRIPT_TABLE WHERE
+		"SAVE_PATH" =
+		#{savePath} AND "IS_DELETE" != true
+	</select>
+
+	<insert id="deleteScript" parameterType="map">
+		UPSERT INTO
+		BX_SCRIPT_TABLE(
+		RAW_ID, IS_DELETE
+		)
+		VALUES(
+		#{rawID}, #{isDelete}
+		)
+	</insert>
+
+	<update id="updateScript" parameterMap="script_model">
+		UPSERT INTO
+		BX_SCRIPT_TABLE(
+		RAW_ID, NAME, SCRIPT_TYPE, SAVE_PATH, MODIFY_DATE,
+		PODMAN_IMG_ID,
+		PODMAN_ID, PODMAN_NAME, PODMAN_REPO, PODMAN_TAG
+		)
+		VALUES(
+		#{rawID},
+		#{name}, #{scriptType}, #{savePath}, #{modifyDate},
+		#{podmanImgID}, #{podmanID},
+		#{podmanName}, #{podmanRepo}, #{podmanTag}
+		)
+	</update>
+
+	<select id="isExistScript" parameterType="map" resultType="int">
+		SELECT COUNT(*) FROM
+		BX_SCRIPT_TABLE WHERE
+		"NAME" = #{name}
+		AND
+		"SAVE_PATH" = #{savePath}
+		AND
+		"MEMBER_ID" = #{memberID}
+		AND
+		"IS_DELETE" !=
+		true LIMIT 1
+	</select>
+
+</mapper>

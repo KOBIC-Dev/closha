@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="org.kobic.bioexpress.db.dto.workspace.WorkspaceDto">
+
+	<parameterMap
+		type="org.kobic.bioexpress.model.workspace.WorkspaceModel"
+		id="workspace"></parameterMap>
+
+	<resultMap id="workspace_model" type="org.kobic.bioexpress.model.workspace.WorkspaceModel">
+		<result property="rawID" column="RAW_ID" />
+		<result property="workspaceID" column="WORKSPACE_ID" />
+		<result property="workspaceName" column="WORKSPACE_NAME" />
+		<result property="description" column="DESCRIPTION" />
+		<result property="keyword" column="KEYWORD" />
+		<result property="memberID" column="MEMBER_ID" />
+		<result property="createDate" column="CREATE_DATE" />
+		<result property="updateDate" column="UPDATE_DATE" />
+		<result property="deleteDate" column="DELETE_DATE" />
+		<result property="status" column="STATUS" />
+		<result property="tmp" column="TMP" />
+		<result property="pipelineCount" column="PIPELINE_COUNT" />
+		<result property="isDelete" column="IS_DELETE" />
+	</resultMap>
+	
+	<resultMap id="workspace_model_with_pipeline_count" type="org.kobic.bioexpress.model.workspace.WorkspaceModel">
+		<result property="rawID" column="w.RAW_ID" />
+		<result property="workspaceID" column="w.WORKSPACE_ID" />
+		<result property="workspaceName" column="w.WORKSPACE_NAME" />
+		<result property="description" column="w.DESCRIPTION" />
+		<result property="keyword" column="w.KEYWORD" />
+		<result property="memberID" column="w.MEMBER_ID" />
+		<result property="createDate" column="w.CREATE_DATE" />
+		<result property="updateDate" column="w.UPDATE_DATE" />
+		<result property="deleteDate" column="w.DELETE_DATE" />
+		<result property="status" column="w.STATUS" />
+		<result property="pipelineCount" column="u.PIPELINE_COUNT" />
+	</resultMap>
+
+	<insert id="insertWorkspace" parameterMap="workspace">
+		UPSERT INTO
+		BX_WORKSPACE_TABLE(
+		RAW_ID,
+		WORKSPACE_ID,
+		WORKSPACE_NAME,
+		DESCRIPTION,
+		KEYWORD,
+		MEMBER_ID,
+		CREATE_DATE,
+		UPDATE_DATE,
+		DELETE_DATE,
+		STATUS,
+		TMP,
+		IS_DELETE)
+		VALUES(
+		#{rawID},
+		#{workspaceID},
+		#{workspaceName},
+		#{description},
+		#{keyword},
+		#{memberID},
+		#{createDate},
+		#{updateDate},
+		#{deleteDate},
+		#{tmp},
+		#{status},
+		#{isDelete})
+	</insert>
+
+	<update id="updateWorkspaceData" parameterType="map">
+		UPSERT INTO
+		BX_WORKSPACE_TABLE(
+		RAW_ID,
+		WORKSPACE_NAME,
+		DESCRIPTION,
+		KEYWORD,
+		UPDATE_DATE)
+		VALUES(
+		#{rawID},
+		#{workspaceName},
+		#{description},
+		#{keyword},
+		#{updateDate})
+	</update>
+
+	<update id="updateWorkspaceStatus" parameterType="map">
+		UPSERT INTO
+		BX_WORKSPACE_TABLE(
+		RAW_ID,
+		UPDATE_DATE,
+		STATUS)
+		VALUES(
+		#{rawID},
+		#{updateDate},
+		#{status}) 
+	</update>
+
+	<update id="updateWorkspaceCount" parameterType="map">
+		UPSERT INTO
+		BX_WORKSPACE_TABLE(
+		RAW_ID,
+		UPDATE_DATE,
+		STATUS)
+		VALUES(
+		#{rawID},
+		#{updateDate},
+		#{status}) 
+	</update>
+
+	<update id="deleteWorkspace" parameterType="map">
+		UPSERT INTO
+		BX_WORKSPACE_TABLE(
+		RAW_ID,
+		DELETE_DATE,
+		IS_DELETE)
+		VALUES(
+		#{rawID},
+		#{deleteDate},
+		#{isDelete})
+	</update>
+
+	<select id="getAllWorkspace" resultMap="workspace_model">
+		SELECT * FROM BX_WORKSPACE_TABLE
+	</select>
+
+	<select id="getWorkspace" resultMap="workspace_model" parameterType="string">
+		SELECT * FROM BX_WORKSPACE_TABLE
+		WHERE "RAW_ID" = #{rawID}
+	</select>
+
+	<select id="getUserWorkspace" resultMap="workspace_model_with_pipeline_count" parameterType="string">
+		SELECT 
+			w.RAW_ID,
+			w.WORKSPACE_ID,
+			w.WORKSPACE_NAME,
+			w.DESCRIPTION,
+			w.KEYWORD,
+			w.MEMBER_ID,
+			w.CREATE_DATE,
+			w.UPDATE_DATE, 
+			w.DELETE_DATE, 
+			w.STATUS, 
+			u.WORKSPACE_ID,
+			u.PIPELINE_COUNT 
+		FROM BX_WORKSPACE_TABLE w 
+		LEFT JOIN 
+			(SELECT "workspaceID" AS WORKSPACE_ID, count("workspaceID") AS PIPELINE_COUNT 
+				FROM BX_PIPELINE_TABLE 
+				WHERE "isDelete" = 'false'
+				AND "owner" = #{memberID}
+				GROUP BY "workspaceID") AS u 
+		ON w.WORKSPACE_ID = u.WORKSPACE_ID WHERE w."MEMBER_ID" = #{memberID} AND w.IS_DELETE = false
+		ORDER BY "CREATE_DATE" DESC
+	</select>
+
+	<select id="getUserWorkspaceStateOfDelete" resultMap="workspace_model" parameterType="map">
+		SELECT * FROM
+		BX_WORKSPACE_TABLE
+		WHERE "MEMBER_ID" = #{memberID} AND "IS_DELETE" = #{isDelete}
+		ORDER BY "CREATE_DATE" DESC
+	</select>
+
+	<select id="getWorkspaceCount" resultType="java.lang.Integer" parameterType="string">
+		SELECT COUNT(*) FROM BX_WORKSPACE_TABLE
+		WHERE "MEMBER_ID" = #{memberID} AND "IS_DELETE" = false
+	</select>
+	
+	<select id="getWorkspaceTotalCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM BX_WORKSPACE_TABLE WHERE "IS_DELETE" = false
+	</select>
+	
+	<select id="getWorkspaceAllTotalCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM BX_WORKSPACE_TABLE
+	</select>
+
+	<select id="getWorkspacePaging" resultMap="workspace_model" parameterType="map">
+		SELECT * FROM BX_WORKSPACE_TABLE
+		WHERE "IS_DELETE" = false
+		<if test="memberID != null and !memberID.equals('')">
+		AND "MEMBER_ID"= #{memberID}
+		</if>
+		ORDER BY "CREATE_DATE" DESC
+		LIMIT #{range, jdbcType=INTEGER} OFFSET #{start, jdbcType=INTEGER}
+	</select>
+
+	<select id="getWorkspaceCreaterDeduplicationCount" resultType="java.lang.Integer">
+		SELECT COUNT(DISTINCT(MEMBER_ID)) FROM BX_WORKSPACE_TABLE
+	</select>
+
+	<select id="getWorkspaceCreaterDeduplication" resultType="java.lang.String">
+		SELECT DISTINCT(MEMBER_ID) FROM BX_WORKSPACE_TABLE
+	</select>
+
+</mapper>

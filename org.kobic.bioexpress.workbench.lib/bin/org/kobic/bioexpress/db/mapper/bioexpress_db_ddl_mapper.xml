@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ 
+<mapper namespace="org.kobic.bioexpress.db.dto.ddl.DatabaseDDLDto">
+	
+	<!-- Category -->
+	<update id="createCategoryTable">
+		CREATE TABLE IF NOT EXISTS BX_CATEGORY_TABLE (
+		"RAW_ID"		 VARCHAR NOT NULL,
+		"CATEGORY_ID"    VARCHAR,
+		"CATEGORY_NAME"  VARCHAR,
+		"CATEGORY_DESC"  VARCHAR,
+		"PARENT_ID" 	 VARCHAR,
+		"MEMBER_ID" 	 VARCHAR,
+		"CREATE_DATE" 	 VARCHAR,
+		"UPDATE_DATE" 	 VARCHAR,
+		"DELETE_DATE" 	 VARCHAR,
+		"IS_ROOT"		 BOOLEAN,
+		"IS_PUBLIC"		 BOOLEAN,
+		"IS_ADMIN" 	     BOOLEAN,
+		"IS_DELETE" 	 BOOLEAN,
+		"IS_PIPELINE"	 BOOLEAN,
+		"IS_PROGRAM"	 BOOLEAN
+		CONSTRAINT PK PRIMARY KEY("RAW_ID"))
+		COLUMN_ENCODED_BYTES = 0,
+		DATA_BLOCK_ENCODING='FAST_DIFF', VERSIONS=100,
+		CACHE_INDEX_ON_WRITE='true', REPLICATION_SCOPE='2'
+	</update>
+
+	<update id="deleteCategoryTable">
+		DROP TABLE IF EXISTS BX_CATEGORY_TABLE
+	</update>	
+	
+	<!-- ########################################################## -->
+	
+	<!-- Workspace -->
+	<update id="createWorkspaceTable">
+		CREATE TABLE IF NOT EXISTS BX_WORKSPACE_TABLE (
+		"RAW_ID" 		 VARCHAR NOT NULL,
+		"WORKSPACE_ID"   VARCHAR,
+		"WORKSPACE_NAME" VARCHAR,
+		"DESCRIPTION" 	 VARCHAR,
+		"KEYWORD"	 	 VARCHAR,
+		"MEMBER_ID" 	 VARCHAR,
+		"CREATE_DATE" 	 VARCHAR,
+		"UPDATE_DATE" 	 VARCHAR,
+		"DELETE_DATE" 	 VARCHAR,
+		"STATUS" 	 	 VARCHAR,
+		"TMP" 	 	     VARCHAR,
+		"IS_DELETE" 	 BOOLEAN
+		CONSTRAINT PK PRIMARY KEY("RAW_ID"))
+		COLUMN_ENCODED_BYTES = 0,
+		DATA_BLOCK_ENCODING='FAST_DIFF', VERSIONS=100,
+		CACHE_INDEX_ON_WRITE='true', REPLICATION_SCOPE='2'
+	</update>
+
+	<update id="deleteWorkspaceTable">
+		DROP TABLE IF EXISTS BX_WORKSPACE_TABLE
+	</update>
+	
+	<!-- ########################################################## -->
+	
+	<!-- Program View -->
+	<update id="createProgramView">
+		CREATE VIEW IF NOT EXISTS BX_PROGRAM_TABLE ( 
+		"rawID"       			VARCHAR PRIMARY KEY,
+		"ge"."programID" 		VARCHAR,
+		"ge"."programName" 		VARCHAR,
+		"ge"."programDesc" 		VARCHAR,
+		"ge"."keyword" 			VARCHAR,
+		"ge"."memberID" 		VARCHAR,
+		"ge"."registrant" 		VARCHAR,
+		"ge"."registedDate" 	VARCHAR,
+		"ge"."modifiedDate" 	VARCHAR,
+		"ge"."rootCategoryID" 	VARCHAR,
+		"ge"."rootCategoryName" VARCHAR,
+		"ge"."subCategoryID" 	VARCHAR,
+		"ge"."subCategoryName" 	VARCHAR,
+		"ge"."scriptPath" 		VARCHAR,
+		"ge"."scriptType" 		VARCHAR,
+		"ge"."url"				VARCHAR,
+		"ge"."version" 			VARCHAR,
+		"ge"."env" 				VARCHAR,
+		"ge"."status" 			VARCHAR,
+		"ge"."coreNum" 			VARCHAR,
+		"ge"."message" 			VARCHAR,
+		"ge"."reason" 			VARCHAR,
+		"ge"."key" 				VARCHAR,
+		"ge"."icon" 			VARCHAR,
+		"ge"."registCode"      	VARCHAR,
+		"ge"."isPublic" 		VARCHAR,
+		"ge"."isMultiCore" 		VARCHAR,
+		"ge"."isDelete" 		VARCHAR)
+	</update>
+	
+	<delete id="deleteProgramView">
+		DROP VIEW IF EXISTS BX_PROGRAM_TABLE
+	</delete>
+	
+	<!-- ########################################################## -->
+	
+	<!-- Register Pipeline -->
+	<update id="createPipelineView">
+		CREATE VIEW IF NOT EXISTS BX_PIPELINE_TABLE (
+		"rawID" 		 			VARCHAR PRIMARY KEY,
+		"ge"."pipelineID"    		VARCHAR,
+		"ge"."pipelineName"  		VARCHAR,
+		"ge"."pipelineDesc"	 		VARCHAR,
+		"ge"."keyword" 	     		VARCHAR,
+		"ge"."owner" 	 			VARCHAR,
+		"ge"."registrant" 	 		VARCHAR,
+		"ge"."createDate" 	 		VARCHAR,
+		"ge"."updateDate" 	 		VARCHAR,
+		"ge"."deleteDate" 	 		VARCHAR,
+		"ge"."version" 	     		VARCHAR,
+		"ge"."categoryID" 	 		VARCHAR,
+		"ge"."categoryName" 		VARCHAR,
+		"ge"."workspaceID" 	 		VARCHAR,
+		"ge"."workspaceName" 		VARCHAR,
+		"ge"."status" 	     		VARCHAR,	
+		"ge"."reference"      		VARCHAR,
+		"ge"."pipelineTemplate" 	VARCHAR,
+		"ge"."bpmTemplate" 			VARCHAR,
+		"ge"."message"      		VARCHAR,
+		"ge"."reason"      			VARCHAR,
+		"ge"."exeCount"      		VARCHAR,
+		"ge"."registCode"      		VARCHAR,
+		"ge"."isPublic"		 		VARCHAR,
+		"ge"."isDelete" 	 		VARCHAR,
+		"ge"."isShared" 	 		VARCHAR,
+		"ge"."isInstance" 	 		VARCHAR)
+	</update>
+
+	<update id="deletePipelineView">
+		DROP VIEW IF EXISTS BX_PIPELINE_TABLE
+	</update>
+
+	<!-- ########################################################## -->
+	
+	<!-- JobLog -->
+	<update id="createJobLogTable">
+		CREATE TABLE IF NOT EXISTS BX_JOB_LOG_TABLE (
+		"RAW_ID"			VARCHAR NOT NULL,
+		"PIPELINE_ID"    	VARCHAR,
+		"NODE_ID"    		VARCHAR,
+		"JOB_ID"  			VARCHAR,
+		"SUB_TASK_ID"  		VARCHAR,
+		"MEMBER_ID"  		VARCHAR,
+		"SUBMISSION_TIME"  	VARCHAR,
+		"STDERR_PATH" 		VARCHAR,
+		"STDOUT_PATH" 		VARCHAR,
+		"SCRIPT_FILE" 		VARCHAR
+		CONSTRAINT PK PRIMARY KEY("RAW_ID"))
+		COLUMN_ENCODED_BYTES = 0,
+		DATA_BLOCK_ENCODING='FAST_DIFF', VERSIONS=100,
+		CACHE_INDEX_ON_WRITE='true', REPLICATION_SCOPE='2'
+	</update>
+
+	<update id="deleteJobLogTable">
+		DROP TABLE IF EXISTS BX_JOB_LOG_TABLE
+	</update>	
+	
+	<!-- ########################################################## -->
+	
+	<!-- JobDetailLog -->
+	<update id="createJobDetailLogTable">
+		CREATE TABLE IF NOT EXISTS BX_JOB_DETAIL_LOG_TABLE (
+		"RAW_ID"			VARCHAR NOT NULL,
+		"NODE_ID"    		VARCHAR,
+		"JOB_NUMBER"  		VARCHAR,
+		"EXEC_FILE"  		VARCHAR,
+		"SUBMISSION_TIME" 	VARCHAR,
+		"OWNER" 			VARCHAR,
+		"UID" 				VARCHAR,
+		"USER_GROUP"  		VARCHAR,
+		"GID"  				VARCHAR,
+		"SGE_HOME"  		VARCHAR,
+		"SGE_LOG_NAME" 		VARCHAR,
+		"SGE_SHELL" 		VARCHAR,
+		"SGE_WORKDIR" 		VARCHAR,
+		"SGE_HOST"    		VARCHAR,
+		"ACCOUNT"  			VARCHAR,
+		"STDERR_PATH_LIST"	VARCHAR,
+		"STDOUT_PATH_LIST" 	VARCHAR,
+		"HARD_QUEUE_LIST" 	VARCHAR,
+		"JOB_NAME" 			VARCHAR,
+		"SHELL_LIST"    	VARCHAR,
+		"JOB_ARGS"  		VARCHAR,
+		"SCRIPT_FILE"  		VARCHAR,
+		"TIME_STAMP"  		VARCHAR
+		CONSTRAINT PK PRIMARY KEY("RAW_ID"))
+		COLUMN_ENCODED_BYTES = 0,
+		DATA_BLOCK_ENCODING='FAST_DIFF', VERSIONS=100,
+		CACHE_INDEX_ON_WRITE='true', REPLICATION_SCOPE='2'
+	</update>
+
+	<update id="deleteJobDetailLogTable">
+		DROP TABLE IF EXISTS BX_JOB_DETAIL_LOG_TABLE
+	</update>	
+	
+	<!-- ########################################################## -->
+	
+	<!-- LogData -->
+	<update id="createLogDataTable">
+		CREATE TABLE IF NOT EXISTS BX_LOG_DATA_TABLE (
+		"RAW_ID"		VARCHAR NOT NULL,
+		"NODE_ID"    	VARCHAR,
+		"JOB_ID"  		VARCHAR,
+		"END_TIME"  		VARCHAR,
+		"STDOUT" 		VARCHAR,
+		"STDERR" 		VARCHAR
+		CONSTRAINT PK PRIMARY KEY("RAW_ID"))
+		COLUMN_ENCODED_BYTES = 0,
+		DATA_BLOCK_ENCODING='FAST_DIFF', VERSIONS=100,
+		CACHE_INDEX_ON_WRITE='true', REPLICATION_SCOPE='2'
+	</update>
+
+	<update id="deleteLogDataTable">
+		DROP TABLE IF EXISTS BX_LOG_DATA_TABLE
+	</update>
+	
+	<!-- JobResourceUsageLogData -->
+	<update id="createJobResourceUsageLogDataTable">
+		CREATE TABLE IF NOT EXISTS BX_JOB_RESOURCE_USAGE_LOG_DATA_TABLE (
+		"RAW_ID"		VARCHAR NOT NULL,
+		"NODE_ID"   	VARCHAR,
+		"JOB_ID"  		VARCHAR,
+		"CPU"  			VARCHAR,
+		"MEM" 			VARCHAR,
+		"IO" 			VARCHAR,
+		"VMEM" 			VARCHAR,
+		"MAXVMEM" 		VARCHAR,
+		"TIME_STAMP" 	VARCHAR,
+		"MEMBER_ID" 	VARCHAR,
+		"PIPELINE_ID" 	VARCHAR
+		CONSTRAINT PK PRIMARY KEY("RAW_ID"))
+		COLUMN_ENCODED_BYTES = 0,
+		DATA_BLOCK_ENCODING='FAST_DIFF', VERSIONS=100,
+		CACHE_INDEX_ON_WRITE='true', REPLICATION_SCOPE='2'
+	</update>
+
+	<update id="deleteJobResourceUsageLogDataTable">
+		DROP TABLE IF EXISTS BX_JOB_RESOURCE_USAGE_LOG_DATA_TABLE
+	</update>
+	
+	<!-- ########################################################## -->
+	
+	<!-- Task -->
+	<update id="createTaskTable">
+		CREATE TABLE IF NOT EXISTS BX_TASK_TABLE (
+		"RAW_ID"			VARCHAR NOT NULL,
+		"TASK_ID"    		VARCHAR,
+		"TASK_NAME"  		VARCHAR,
+		"TASK_DESC"  		VARCHAR,
+		"SUBMISSION_TIME" 	VARCHAR,
+		"PIPELINE_ID" 		VARCHAR,
+		"PIPELINE_NAME" 	VARCHAR,
+	    "WORKSPACE_NAME" 	VARCHAR,
+		"MEMBER_ID"  		VARCHAR,
+		"STATUS" 			VARCHAR,
+		"TIME_STAMP"  		VARCHAR,
+		"IS_DELETE" 		BOOLEAN
+		CONSTRAINT PK PRIMARY KEY("RAW_ID"))
+		COLUMN_ENCODED_BYTES = 0,
+		DATA_BLOCK_ENCODING='FAST_DIFF', VERSIONS=100,
+		CACHE_INDEX_ON_WRITE='true', REPLICATION_SCOPE='2'
+	</update>
+
+	<update id="deleteTaskTable">
+		DROP TABLE IF EXISTS BX_TASK_TABLE
+	</update>
+	
+	<!-- ########################################################## -->
+	
+	<!-- SubTask -->
+	<update id="createSubTaskTable">
+		CREATE TABLE IF NOT EXISTS BX_SUB_TASK_TABLE (
+		"RAW_ID"			VARCHAR NOT NULL,
+		"NODE_ID"   		VARCHAR,
+		"TASK_ID" 			VARCHAR,
+		"SUB_TASK_ID" 		VARCHAR,
+		"SUBMISSION_TIME" 	VARCHAR,
+		"NODE_NAME" 		VARCHAR,
+		"PROGRAM_NAME" 		VARCHAR,
+		"PIPELINE_ID"  		VARCHAR,
+		"PIPELINE_NAME" 	VARCHAR,
+	    "WORKSPACE_NAME" 	VARCHAR,
+		"MEMBER_ID"  		VARCHAR,
+		"STATUS"  			VARCHAR,
+		"TIME_STAMP"  		VARCHAR,
+		"IS_SINGLE"  		BOOLEAN
+		CONSTRAINT PK PRIMARY KEY("RAW_ID"))
+		COLUMN_ENCODED_BYTES = 0,
+		DATA_BLOCK_ENCODING='FAST_DIFF', VERSIONS=100,
+		CACHE_INDEX_ON_WRITE='true', REPLICATION_SCOPE='2'
+	</update>
+
+	<update id="deleteSubTaskTable">
+		DROP TABLE IF EXISTS BX_SUB_TASK_TABLE
+	</update>
+	
+	<!-- ########################################################## -->
+	
+	<!-- wandisco -->
+	<update id="createWandiscoHistoryTable">
+		CREATE TABLE IF NOT EXISTS BX_WANDISCO_HISTORY_TABLE (
+		"RAW_ID"			VARCHAR NOT NULL,
+		"TASK_ID" 			VARCHAR,
+		"PATH" 				VARCHAR,
+		"ZONE" 				VARCHAR,
+		"MEMBER_ID"  		VARCHAR,
+		"START_TIME"  		VARCHAR,
+		"END_TIME"  		VARCHAR,
+		"STATUS"  			VARCHAR,
+		"IS_FILE"  			BOOLEAN
+		CONSTRAINT PK PRIMARY KEY("RAW_ID"))
+		COLUMN_ENCODED_BYTES = 0,
+		DATA_BLOCK_ENCODING='FAST_DIFF', VERSIONS=100,
+		CACHE_INDEX_ON_WRITE='true', REPLICATION_SCOPE='2'
+	</update>
+
+	<update id="deleteWandiscoHistoryTable">
+		DROP TABLE IF EXISTS BX_WANDISCO_HISTORY_TABLE
+	</update>
+	
+	<!-- ########################################################## -->
+	
+	<!-- wandisco -->
+	<update id="createGBoxFileHistoryLogTable">
+		CREATE TABLE IF NOT EXISTS BX_GBOX_FILE_HISTORY_LOG_TABLE (
+		"RAW_ID"			VARCHAR NOT NULL,
+		"MEMBER_ID" 		VARCHAR,
+		"EVENT_TYPE" 		VARCHAR,
+		"NAME" 				VARCHAR,
+		"SOURCE_PATH"  		VARCHAR,
+		"TARGET_PATH"  		VARCHAR,
+		"SUBMISSION_TIME"  	VARCHAR,
+		"IS_FILE"  			BOOLEAN,
+		"IS_DIR"  			BOOLEAN
+		CONSTRAINT PK PRIMARY KEY("RAW_ID"))
+		COLUMN_ENCODED_BYTES = 0,
+		DATA_BLOCK_ENCODING='FAST_DIFF', VERSIONS=100,
+		CACHE_INDEX_ON_WRITE='true', REPLICATION_SCOPE='2'
+	</update>
+
+	<update id="deleteGBoxFileHistoryLogTable">
+		DROP TABLE IF EXISTS BX_GBOX_FILE_HISTORY_LOG_TABLE
+	</update>
+	
+	<!-- Community -->
+	<update id="createCommunityTable">
+		CREATE TABLE IF NOT EXISTS BX_COMMUNITY_TABLE (
+		"RAW_ID"		 VARCHAR NOT NULL,
+		"IS_ROOT"    	 BOOLEAN,
+		"DEPTH"			 INTEGER,
+		"BUNDLE_ID"	 	 VARCHAR,
+		"BUNDLE_ORDER"	 INTEGER,
+		"MEMBER_ID"	 	 VARCHAR,
+		"TITLE"		 	 VARCHAR,
+		"CONTENT"	 	 VARCHAR,
+		"KEYWORD"		 VARCHAR,
+		"CATEGORY"		 VARCHAR,
+		"VIEW_COUNT"     INTEGER,
+		"LIKE_COUNT"     INTEGER,
+		"REPLY_COUNT"    INTEGER,
+		"IS_LIKE"		 BOOLEAN,	
+		"IS_BOOKMARK"	 BOOLEAN,	
+		"IS_DELETE" 	 BOOLEAN,
+		"WRITE_DATE"	 VARCHAR,
+		"UPDATE_DATE"    VARCHAR,
+		"DELETE_DATE" 	 VARCHAR
+		CONSTRAINT PK PRIMARY KEY("RAW_ID"))
+		COLUMN_ENCODED_BYTES = 0,
+		DATA_BLOCK_ENCODING='FAST_DIFF', VERSIONS=100,
+		CACHE_INDEX_ON_WRITE='true', REPLICATION_SCOPE='2'
+	</update>
+
+	<update id="deleteCommunityTable">
+		DROP TABLE IF EXISTS BX_COMMUNITY_TABLE
+	</update>
+
+	<update id="createCommunityLikeTable">
+		CREATE TABLE IF NOT EXISTS BX_COMMUNITY_LIKE_TABLE (
+		"COMMUNITY_ID"    	   VARCHAR NOT NULL,
+		"COMMUNITY_BUNDLE_ID"  VARCHAR,
+		"MEMBER_ID"	 	 	   VARCHAR NOT NULL
+		CONSTRAINT PK PRIMARY KEY("COMMUNITY_ID", "MEMBER_ID"))
+		COLUMN_ENCODED_BYTES = 0,
+		DATA_BLOCK_ENCODING='FAST_DIFF', VERSIONS=100,
+		CACHE_INDEX_ON_WRITE='true', REPLICATION_SCOPE='2'
+	</update>
+	
+	<update id="deleteCommunityLikeTable">
+		DROP TABLE IF EXISTS BX_COMMUNITY_LIKE_TABLE
+	</update>
+
+	<update id="createCommunityBookmarkTable">
+		CREATE TABLE IF NOT EXISTS BX_COMMUNITY_BOOKMARK_TABLE (
+		"COMMUNITY_ID"    	   VARCHAR NOT NULL,
+		"COMMUNITY_BUNDLE_ID"  VARCHAR,
+		"MEMBER_ID"	 	 	   VARCHAR NOT NULL
+		CONSTRAINT PK PRIMARY KEY("COMMUNITY_ID", "MEMBER_ID"))
+		COLUMN_ENCODED_BYTES = 0,
+		DATA_BLOCK_ENCODING='FAST_DIFF', VERSIONS=100,
+		CACHE_INDEX_ON_WRITE='true', REPLICATION_SCOPE='2'
+	</update>
+	
+	<update id="deleteCommunityBookmarkTable">
+		DROP TABLE IF EXISTS BX_COMMUNITY_BOOKMARK_TABLE
+	</update>
+	
+	<!-- Script Task -->
+	<update id="createScriptTaskTable">
+		CREATE TABLE IF NOT EXISTS BX_SCRIPT_TASK_TABLE (
+		"RAW_ID" VARCHAR NOT NULL,
+		"JOB_ID" VARCHAR,
+		"SCRIPT_NAME" VARCHAR,
+		"SCRIPT_FILE" VARCHAR,
+		"LANGUAGE" VARCHAR,
+		"MEMBER_ID" VARCHAR,
+		"SUBMISSION_TIME" VARCHAR,
+		"FINAL_COMPLETE_TIME" VARCHAR,
+		"STD_ERR_PATH" VARCHAR,
+		"STD_OUT_PATH" VARCHAR,
+		"STATUS" VARCHAR,
+		"TIMESTAMP" VARCHAR,
+		"REPO" VARCHAR,
+		"TAG" VARCHAR,
+		"ENV" VARCHAR,
+		"IS_DELETE" BOOLEAN
+		CONSTRAINT PK PRIMARY KEY("RAW_ID"))
+		COLUMN_ENCODED_BYTES = 0,
+		DATA_BLOCK_ENCODING='FAST_DIFF', VERSIONS=100,
+		CACHE_INDEX_ON_WRITE='true', REPLICATION_SCOPE='2'
+	</update>
+	
+	<update id="deleteScriptTaskTable">
+		DROP TABLE IF EXISTS BX_SCRIPT_TASK_TABLE
+	</update>
+	
+	<!-- Pop Up -->
+	<update id="createPopUpTable">
+		CREATE TABLE IF NOT EXISTS BX_POPUP_TABLE (
+		"RAW_ID" VARCHAR NOT NULL,
+		"POPUP_ID" VARCHAR,
+		"POPUP_NO" INTEGER,
+		"TITLE_MAIN" VARCHAR,
+		"TITLE_SUB" VARCHAR,
+		"PRIORITY" INTEGER,
+		"CONTENT_MAIN" VARCHAR,
+		"CONTENT_SUB" VARCHAR,
+		"START_DATE" DATE,
+		"END_DATE" DATE,
+		"LINK" VARCHAR,
+		"INSERT_DT" DATE,
+		"UPDATE_DT" DATE,
+		"DELETE_DT" DATE,
+		"USE_ST" INTEGER,
+		"INST_DT" VARCHAR,
+		"UPT_DT" VARCHAR,
+		"DEL_DT" VARCHAR,
+		"ST_DT" VARCHAR,
+		"ED_DT" VARCHAR,
+		"TARGET" VARCHAR
+		CONSTRAINT PK PRIMARY KEY("RAW_ID"))
+		COLUMN_ENCODED_BYTES = 0,
+		DATA_BLOCK_ENCODING='FAST_DIFF', VERSIONS=100,
+		CACHE_INDEX_ON_WRITE='true', REPLICATION_SCOPE='2'
+	</update>
+	
+	<update id="deletePopUpTable">
+		DROP TABLE IF EXISTS BX_POPUP_TABLE
+	</update>
+	
+	<!-- Script -->
+	<update id="createScriptTable">
+		CREATE TABLE IF NOT EXISTS BX_SCRIPT_TABLE (
+		"RAW_ID" VARCHAR NOT NULL,
+		"SCRIPT_ID" VARCHAR,
+		"NAME" VARCHAR,
+		"SCRIPT_TYPE" VARCHAR,
+		"SAVE_PATH" VARCHAR,
+		"PARENT_PATH" VARCHAR,
+		"CREATE_DATE" DATE,
+		"MODIFY_DATE" DATE,
+		"MEMBER_ID" VARCHAR,
+		"PODMAN_ID" VARCHAR,
+		"PODMAN_IMG_ID" VARCHAR,
+		"PODMAN_NAME" VARCHAR,
+		"PODMAN_REPO" VARCHAR,
+		"PODMAN_TAG" VARCHAR,
+		"TIMESTAMP" VARCHAR,
+		"IS_DELETE" BOOLEAN
+		CONSTRAINT PK PRIMARY KEY("RAW_ID"))
+		COLUMN_ENCODED_BYTES = 0,
+		DATA_BLOCK_ENCODING='FAST_DIFF', VERSIONS=100,
+		CACHE_INDEX_ON_WRITE='true', REPLICATION_SCOPE='2'
+	</update>
+	
+	<update id="deleteScriptTable">
+		DROP TABLE IF EXISTS BX_SCRIPT_TABLE
+	</update>
+	
+	<!-- Podman -->
+	<update id="createPodmanTable">
+		CREATE TABLE IF NOT EXISTS BX_PODMAN_TABLE (
+		"RAW_ID" VARCHAR NOT NULL,
+		"PODMAN_ID" VARCHAR,
+		"IMAGE_ID" VARCHAR,
+		"NAME" VARCHAR,
+		"REPO" VARCHAR,
+		"TAG" VARCHAR,
+		"DESCRIPTION" VARCHAR,
+		"SAVE_PATH" VARCHAR,
+		"CREATE_DATE" DATE,
+		"MODIFY_DATE" DATE,
+		"MEMBER_ID" VARCHAR,
+		"PODMAN_TYPE" VARCHAR,
+		"STATUS" VARCHAR,
+		"TIMESTAMP" VARCHAR,
+		"IS_DELETE" BOOLEAN,
+		"IS_OFFICIAL" BOOLEAN
+		CONSTRAINT PK PRIMARY KEY("RAW_ID"))
+		COLUMN_ENCODED_BYTES = 0,
+		DATA_BLOCK_ENCODING='FAST_DIFF', VERSIONS=100,
+		CACHE_INDEX_ON_WRITE='true', REPLICATION_SCOPE='2'
+	</update>
+	
+	<update id="deletePodmanTable">
+		DROP TABLE IF EXISTS BX_PODMAN_TABLE
+	</update>
+	
+</mapper>

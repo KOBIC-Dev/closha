@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="org.kobic.bioexpress.workbench.ui.application"
+            name="org.kobic.bioexpress.workbench.ui">
+          <property
+               name="applicationXMI"
+               value="org.kobic.bioexpress.workbench.ui/Application.e4xmi">
+         </property>
+         <property
+               name="appName"
+               value="org.kobic.bioexpress.workbench.ui">
+         </property>
+         <property
+		    name="lifeCycleURI"
+		    value="platform:/plugin/org.kobic.bioexpress.workbench.ui/org.kobic.bioexpress.rcp.E4LifeCycle">
+		</property>
+      </product>
+   </extension>
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="org.kobic.bioexpress.rcp.Application">
+         </run>
+      </application>
+   </extension>
+</plugin>

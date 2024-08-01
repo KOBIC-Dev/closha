@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="paletteContributor" name="Workflow Editor Palette Contributor" schema="schema/paletteContributor.exsd"/>
+   <extension-point id="nodeTypeContributor" name="Workflow Editor Node Type Contributor" schema="schema/nodeTypeContributor.exsd"/>
+   <extension-point id="contextButtonContributor" name="Workflow Editor Context Button Contributor" schema="schema/contextButtonContributor.exsd"/>
+   <extension-point id="nodeTypeEditor" name="Custom Workflow Node Editor" schema="schema/nodeTypeEditor.exsd"/>
+   <extension-point id="nodeRenderer" name="Custom Renderer for Workflow Nodes" schema="schema/nodeRenderer.exsd"/>
+   <extension-point id="mouseAction" name="Workflow Editor Mouse Actions" schema="schema/mouseAction.exsd"/>
+   <extension-point id="resourceContributor" name="Workflow Component Resource Contributor" schema="schema/resourceContributor.exsd"/>
+   <extension-point id="nodeIcon" name="Workflow Editor Node Icon Contributor" schema="schema/nodeIcon.exsd"/>
+<extension
+      point="org.eclipse.graphiti.ui.diagramTypes">
+    <diagramType
+      description="DART Workflow Diagram Type"
+      id="org.kobic.bioexpress.workbench.editor.WorkflowDiagramType"
+      name="DART Workflow Diagram Type"
+      type="dartWorkflow">
+    </diagramType>
+  </extension>
+
+  <extension
+      point="org.eclipse.graphiti.ui.diagramTypeProviders">
+    <diagramTypeProvider
+      class="org.kobic.bioexpress.workbench.editor.WorkflowDiagramTypeProvider"
+      description="DART Workflow Diagram Type Provider"
+      id="org.kobic.bioexpress.workbench.editor.WorkflowDiagramTypeProvider"
+      name="DART Workflow Editor">
+      <diagramType
+        id="org.kobic.bioexpress.workbench.editor.WorkflowDiagramType">
+      </diagramType>
+      <imageProvider
+            id="org.kobic.bioexpress.workbench.editor.WorkflowImageProvider">
+      </imageProvider>
+    </diagramTypeProvider>
+  </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated domain -->
+      <package
+            uri="https://kobic.or.kr/bioexpress/domain"
+            class="gov.sandia.dart.workflow.domain.DomainPackage"
+            genModel="domain.genmodel"/>
+   </extension>
+
+   <extension
+      	point="org.eclipse.graphiti.ui.imageProviders">
+   		<imageProvider
+         class="org.kobic.bioexpress.workbench.editor.WorkflowImageProvider"
+   		      id="org.kobic.bioexpress.workbench.editor.WorkflowImageProvider">
+   		</imageProvider>
+	</extension>
+   	<extension
+         point="org.eclipse.core.runtime.adapters">
+
+           <factory adaptableType="gov.sandia.dart.workflow.domain.WFNode"
+            class="org.kobic.bioexpress.workbench.editor.settings.WorkflowNodeAdapterFactory">
+        		 <adapter
+             		  type="com.strikewire.snl.apc.GUIs.settings.ISettingsEditor">
+         		</adapter>
+      		</factory>
+      		<factory adaptableType="gov.sandia.dart.workflow.domain.Note"
+            class="org.kobic.bioexpress.workbench.editor.settings.WorkflowNodeAdapterFactory">
+        		 <adapter
+             		  type="com.strikewire.snl.apc.GUIs.settings.ISettingsEditor">
+         		</adapter>
+      		</factory>
+       		<factory adaptableType="gov.sandia.dart.workflow.domain.Image"
+            class="org.kobic.bioexpress.workbench.editor.settings.WorkflowNodeAdapterFactory">
+        		 <adapter
+             		  type="com.strikewire.snl.apc.GUIs.settings.ISettingsEditor">
+         		</adapter>
+      		</factory>
+       		<factory adaptableType="gov.sandia.dart.workflow.domain.Response"
+            class="org.kobic.bioexpress.workbench.editor.settings.WorkflowNodeAdapterFactory">
+        		 <adapter
+             		  type="com.strikewire.snl.apc.GUIs.settings.ISettingsEditor">
+         		</adapter>
+      		</factory>    
+      		<factory adaptableType="gov.sandia.dart.workflow.domain.WFArc"
+            class="org.kobic.bioexpress.workbench.editor.settings.WorkflowNodeAdapterFactory">
+        		 <adapter
+             		  type="com.strikewire.snl.apc.GUIs.settings.ISettingsEditor">
+         		</adapter>
+      		</factory>  
+      		<factory adaptableType="gov.sandia.dart.workflow.domain.ResponseArc"
+            class="org.kobic.bioexpress.workbench.editor.settings.WorkflowNodeAdapterFactory">
+        		 <adapter
+             		  type="com.strikewire.snl.apc.GUIs.settings.ISettingsEditor">
+         		</adapter>
+      		</factory>   
+  
+      		<factory adaptableType="org.eclipse.graphiti.ui.internal.parts.ContainerShapeEditPart"
+            class="org.kobic.bioexpress.workbench.editor.settings.WorkflowNodeAdapterFactory">
+         		<adapter
+               		type="com.strikewire.snl.apc.GUIs.settings.ISettingsEditor">
+         		</adapter>
+      		</factory>   
+            <factory adaptableType="org.eclipse.graphiti.ui.internal.parts.ConnectionEditPart"
+            class="org.kobic.bioexpress.workbench.editor.settings.WorkflowNodeAdapterFactory">
+         		<adapter
+               		type="com.strikewire.snl.apc.GUIs.settings.ISettingsEditor">
+        		</adapter>
+      		</factory>   
+      		
+      		<factory adaptableType="org.eclipse.graphiti.ui.internal.parts.IDiagramEditPart"
+            class="org.kobic.bioexpress.workbench.editor.settings.WorkflowNodeAdapterFactory">
+        		 <adapter
+             		  type="com.strikewire.snl.apc.GUIs.settings.ISettingsEditor">
+         		</adapter>
+         		<adapter
+             		  type="org.eclipse.core.resources.IFile">
+         		</adapter>
+      		</factory>           
+		      <factory
+		            adaptableType="org.eclipse.core.resources.IFile"
+		            class="org.kobic.bioexpress.workbench.editor.tree.WorkflowFileAdapterFactory">
+		         <adapter
+		               type="org.kobic.bioexpress.workbench.editor.tree.data.WFTreeRoot">
+		         </adapter>
+		      </factory>
+		      <factory
+		            adaptableType="gov.sandia.dart.workflow.domain.WFNode"
+		            class="org.kobic.bioexpress.workbench.editor.tree.WorkflowFileAdapterFactory">
+		         <adapter
+		               type="org.kobic.bioexpress.workbench.editor.tree.data.WFTreeRoot">
+		         </adapter>
+		      </factory>
+     </extension>
+   <extension
+         point="org.eclipse.ui.navigator.viewer">
+      <viewerContentBinding
+            viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+             <contentExtension
+                  pattern="gov.sandia.dart.workflow.phase3.embedded.workflowNavigator">
+            </contentExtension>
+          </includes>
+      </viewerContentBinding>
+   </extension>
+        <extension
+         point="org.eclipse.ui.navigator.navigatorContent">
+      <navigatorContent
+            contentProvider="org.kobic.bioexpress.workbench.editor.tree.WorkflowFileContentProvider"
+            id="gov.sandia.dart.workflow.phase3.embedded.workflowNavigator"
+            labelProvider="org.kobic.bioexpress.workbench.editor.tree.WorkflowFileLabelProvider"
+            name="Workflow File Navigator Content">
+         <triggerPoints>
+            <or>
+               <adapt
+                     type="org.kobic.bioexpress.workbench.editor.tree.data.WFTreeRoot">
+               </adapt>
+               <instanceof
+                     value="gov.sandia.dart.workflow.domain.WFNode">
+               </instanceof>
+            </or>
+         </triggerPoints>
+      </navigatorContent>
+      <commonWizard
+            menuGroupId="common.new.menu?after=additions"
+            type="new"
+            wizardId="org.kobic.bioexpress.workbench.editor.newWorkflowWizard">
+         <enablement>
+            <or>
+               <instanceof
+                     value="org.eclipse.core.resources.IContainer">
+               </instanceof>
+            </or></enablement>
+      </commonWizard>
+   </extension>  
+     
+    <extension
+          point="org.eclipse.ui.editors">
+       <editor
+             class="org.kobic.bioexpress.workbench.editor.WorkflowDiagramEditor"
+             contributorClass="org.eclipse.graphiti.ui.editor.DiagramEditorActionBarContributor"
+             default="false"
+             extensions="iwf"
+             icon="icons/iwf_file3.png"
+             id="org.kobic.bioexpress.workbench.editor.WorkflowDiagramEditor"
+             matchingStrategy="org.eclipse.graphiti.ui.editor.DiagramEditorMatchingStrategy"
+             name="Workflow Editor">
+       </editor>
+       <editor
+             class="org.kobic.bioexpress.workbench.editor.WorkflowTreeEditor"
+             contributorClass="org.eclipse.graphiti.ui.editor.DiagramEditorActionBarContributor"
+             default="false"
+             extensions="iwf"
+             icon="icons/iwf_file3.png"
+             id="org.kobic.bioexpress.workbench.editor.WorkflowTreeEditor"
+             matchingStrategy="org.eclipse.graphiti.ui.editor.DiagramEditorMatchingStrategy"
+             name="Workflow Tree Editor">
+       </editor>
+       <editor
+             class="org.kobic.bioexpress.workbench.editor.retry.RetryConfigurationEditor"
+             default="true"
+             filenames="retry.conf"
+             id="org.kobic.bioexpress.workbench.editor.retry.config.editor"
+             name="Retry Configuration Editor">
+       </editor>       
+    </extension>
+    <extension
+          point="org.eclipse.core.runtime.preferences">
+       <initializer
+             class="org.kobic.bioexpress.workbench.editor.preferences.WorkflowEditorPreferenceInitializer">
+       </initializer>
+    </extension>
+    <extension
+          id="org.kobic.bioexpress.workbench.editor.wizards"
+          name="New Workflow Wizard"
+          point="org.eclipse.ui.newWizards">
+       <category
+             id="gov.sandia.dart.workflow.wizards"
+             name="Workflow">
+       </category>
+       <wizard
+             category="gov.sandia.dart.workflow.wizards"
+             class="org.kobic.bioexpress.workbench.editor.wizards.NewWorkflowWizard"
+             icon="icons/iwf_file3.png"
+             id="org.kobic.bioexpress.workbench.editor.newWorkflowWizard"
+             name="Workflow">
+          <description>
+             Create a new workflow definition file
+          </description>
+       </wizard>
+    </extension>
+    <extension
+          point="org.eclipse.ui.preferencePages">
+       <page
+             category="gov.sandia.dart.workflow.WorkflowPreferencePage"
+             class="org.kobic.bioexpress.workbench.editor.preferences.WorkflowEditorPreferencePage"
+             id="org.kobic.bioexpress.workbench.editor.page1"
+             name="Bioexpress Editor">
+       </page>
+    </extension>
+        <extension
+              point="org.kobic.bioexpress.workbench.editor.contextButtonContributor">
+           <contributor
+                 class="org.kobic.bioexpress.workbench.editor.BasicContextButtonContributor">
+           </contributor>
+           <contributor
+                 class="org.kobic.bioexpress.workbench.editor.NestedWorkflowContextButtonContributor">
+           </contributor>           
+        </extension>        
+        <extension
+              point="org.kobic.bioexpress.workbench.editor.nodeTypeEditor">
+           <editor
+                 nodeType="nestedWorkflow"
+                 settingsEditor="org.kobic.bioexpress.workbench.editor.settings.nested.NestedWorkflowNodeSettingsEditor">
+           </editor>
+           <editor
+                 nodeType="nestedInternalWorkflow"
+                 settingsEditor="org.kobic.bioexpress.workbench.editor.settings.nested.NestedWorkflowNodeSettingsEditor">
+           </editor>
+           <editor
+                 nodeType="parameter"
+                 settingsEditor="org.kobic.bioexpress.workbench.editor.settings.ParameterSettingsEditor">
+           </editor>           
+        </extension>
+       <extension
+              point="org.kobic.bioexpress.workbench.editor.nodeRenderer">
+           <customRenderer
+                 class="org.kobic.bioexpress.workbench.editor.rendering.OnOffSwitchGARenderer"
+                 nodeType="onOffSwitch">
+           </customRenderer>
+            <customRenderer
+                 class="org.kobic.bioexpress.workbench.editor.rendering.ABSwitchGARenderer"
+                 nodeType="abSwitch">
+           </customRenderer>
+            <customRenderer
+                  class="org.kobic.bioexpress.workbench.editor.rendering.ParameterFileGARenderer"
+                  nodeType="parameterFile">
+            </customRenderer>
+            <customRenderer
+                  class="org.kobic.bioexpress.workbench.editor.rendering.ParameterWFNodeGARenderer"
+                  nodeType="parameter">
+            </customRenderer>
+            <customRenderer
+                  class="org.kobic.bioexpress.workbench.editor.rendering.NestedWorkflowGARenderer"
+                  nodeType="nestedWorkflow">
+            </customRenderer>
+            <customRenderer
+                  class="org.kobic.bioexpress.workbench.editor.rendering.NestedWorkflowGARenderer"
+                  nodeType="remoteNestedWorkflow">
+            </customRenderer>
+            <customRenderer
+                  class="org.kobic.bioexpress.workbench.editor.rendering.NestedInternalWorkflowGARenderer"
+                  nodeType="nestedInternalWorkflow">
+            </customRenderer>
+            <customRenderer
+                  class="org.kobic.bioexpress.workbench.editor.rendering.RotaryOutputSwitchGARenderer"
+                  nodeType="rotaryOutputSwitch">
+            </customRenderer>
+            <customRenderer
+                  class="org.kobic.bioexpress.workbench.editor.rendering.RotaryInputSwitchGARenderer"
+                  nodeType="rotaryInputSwitch">
+            </customRenderer>
+            
+        </extension>
+        <extension
+              point="org.kobic.bioexpress.workbench.editor.mouseAction">
+           <doubleClick
+                 nodeType="remoteNestedWorkflow"
+                 property="fileName">
+           </doubleClick>
+            <doubleClick
+                 customFeature="org.kobic.bioexpress.workbench.editor.features.OperateSwitchFeature$Provider"
+                 nodeType="onOffSwitch"
+                 property="onOff">
+           </doubleClick>
+            <doubleClick
+                 customFeature="org.kobic.bioexpress.workbench.editor.features.OperateSwitchFeature$Provider"
+                 nodeType="abSwitch"
+                 property="a">
+           </doubleClick>
+           <doubleClick
+                 customFeature="org.kobic.bioexpress.workbench.editor.features.OpenInternalNestedWorkflowFeatureProvider"
+                 nodeType="nestedInternalWorkflow"
+                 property="fileContents">
+           </doubleClick>
+           <doubleClick
+                 nodeType="file"
+                 property="fileName">
+           </doubleClick>
+           <doubleClick
+                 nodeType="sierra"
+                 property="inputFile">
+           </doubleClick>
+           <doubleClick
+                 nodeType="fromFile"
+                 property="fileName">
+           </doubleClick>
+           <doubleClick
+                 nodeType="aprepro"
+                 property="templateFile">
+           </doubleClick>
+           <doubleClick
+                 nodeType="sierra"
+                 property="inputFile">
+           </doubleClick>
+           <doubleClick
+                 nodeType="parameterFile"
+                 property="fileName">
+           </doubleClick>
+           <doubleClick
+                 customFeature="org.kobic.bioexpress.workbench.editor.features.OperateRotaryOutputSwitchFeature$Provider"
+                 nodeType="rotaryOutputSwitch"
+                 property="selector">
+           </doubleClick>
+           <doubleClick
+                 customFeature="org.kobic.bioexpress.workbench.editor.features.OperateRotaryInputSwitchFeature$Provider"
+                 nodeType="rotaryInputSwitch"
+                 property="selector">
+           </doubleClick>
+           <doubleClick
+                 customFeature="org.kobic.bioexpress.workbench.editor.features.AutoEditParameterFeatureProvider"
+                 nodeType="parameter"
+                 property="value">
+           </doubleClick>
+            
+        </extension>
+ 
+ 
+    <extension
+      id="org.kobic.bioexpress.workbench.editor.runLocation" 
+      point="org.eclipse.core.resources.markers" 
+      name="Workflow Run Location">
+      <super type="org.eclipse.core.resources.marker"/>
+      <persistent value="true"/>
+      <attribute name="path"/>
+      <attribute name="timestamp"/>
+   </extension>
+</plugin>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="org.kobic.bioexpress.db.dto.program.ProgramDto">
+
+	<parameterMap type="org.kobic.bioexpress.model.program.ProgramDataModel" id="program_data"></parameterMap>
+
+	<resultMap id="program_data_model"
+		type="org.kobic.bioexpress.model.program.ProgramDataModel">
+		<result property="rawID" 			column="rawID" />
+		<result property="programID" 		column="programID" />
+		<result property="programName" 		column="programName" />
+		<result property="programDesc" 		column="programDesc" />
+		<result property="keyword" 			column="keyword" />
+		<result property="memberID" 		column="memberID" />
+		<result property="registrant" 		column="registrant" />
+		<result property="registedDate" 	column="registedDate" />
+		<result property="modifiedDate" 	column="modifiedDate" />
+		<result property="rootCategoryID" 	column="rootCategoryID" />
+		<result property="rootCategoryName" column="rootCategoryName" />
+		<result property="subCategoryID" 	column="subCategoryID" />
+		<result property="subCategoryName" 	column="subCategoryName" />
+		<result property="categoryName" 	column="categoryName" />
+		<result property="scriptPath" 		column="scriptPath" />
+		<result property="scriptType" 		column="scriptType" />
+		<result property="url" 				column="url" />
+		<result property="version" 			column="version" />
+		<result property="env" 				column="env" />
+		<result property="status" 			column="status" />
+		<result property="coreNum" 			column="coreNum" />
+		<result property="message" 			column="message" />
+		<result property="reason" 			column="reason" />
+		<result property="key" 				column="key" />
+		<result property="icon" 			column="icon" />
+		<result property="registCode" 		column="registCode" />
+		<result property="isPublic" 		column="isPublic"  		javaType="java.lang.Boolean" jdbcType="VARCHAR" typeHandler="org.kobic.bioexpress.db.handler.ConvertTypeHandler"/>
+		<result property="isMultiCore" 		column="isMultiCore"	javaType="java.lang.Boolean" jdbcType="VARCHAR" typeHandler="org.kobic.bioexpress.db.handler.ConvertTypeHandler"/>
+		<result property="isDelete" 		column="isDelete"		javaType="java.lang.Boolean" jdbcType="VARCHAR" typeHandler="org.kobic.bioexpress.db.handler.ConvertTypeHandler"/>
+	</resultMap>
+
+	<select id="getProgramDataList" resultMap="program_data_model" parameterType="map">
+		SELECT * FROM BX_PROGRAM_TABLE 
+		WHERE "isDelete" = 'false' 
+		<if test="subCategoryID != null and !subCategoryID.equals('')">
+		AND "subCategoryID" = #{subCategoryID}
+		</if>
+		AND ("isPublic" = 'true' 
+			<if test="memberID != null and !memberID.equals('')">
+			OR "memberID" = #{memberID}
+			</if>
+			) 
+	</select>
+	
+	<select id="getProgramDataListForPallet" resultMap="program_data_model" parameterType="string">
+		SELECT * FROM BX_PROGRAM_TABLE 
+		WHERE "isDelete" = 'false' 
+		AND ("isPublic" = 'true' OR "memberID" = #{memberID})
+	</select>
+
+	<select id="getProgramTotalCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM BX_PROGRAM_TABLE WHERE "isDelete" = 'false'
+	</select>
+	
+	<select id="getAllProgram" resultMap="program_data_model">
+		SELECT * FROM BX_PROGRAM_TABLE  WHERE "isDelete" = 'false'
+		<if test="range != null and !range.equals('') and start != null and !start.equals('')">
+		LIMIT #{range, jdbcType=INTEGER} OFFSET #{start, jdbcType=INTEGER}
+		</if>
+	</select>
+	
+	<select id="getTotalProgram" resultMap="program_data_model">
+		SELECT * FROM BX_PROGRAM_TABLE
+	</select>
+	
+	<select id="getProgramCountOfCategory" resultType="java.lang.Integer" parameterType="string">
+		SELECT COUNT(*) FROM BX_PROGRAM_TABLE 
+		WHERE "subCategoryID" = #{subCategoryID} AND "isDelete" = 'false'
+	</select>
+	
+	<select id="getPublicProgramTotalCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) 
+		FROM BX_PROGRAM_TABLE 
+		WHERE "isPublic" = 'true' AND "isDelete" = 'false'
+	</select>
+	
+	<select id="getPublicProgramList" resultMap="program_data_model">
+		SELECT * 
+		FROM BX_PROGRAM_TABLE 
+		WHERE "isPublic" = 'true' AND "isDelete" = 'false'
+		ORDER BY "registedDate" DESC
+		<if test="range != null and !range.equals('') and start != null and !start.equals('')">
+		LIMIT #{range, jdbcType=INTEGER} OFFSET #{start, jdbcType=INTEGER}
+		</if>
+	</select>
+	
+	<select id="getProgramListWithRegistCodeTotalCount" resultType="java.lang.Integer" parameterType="string">
+		SELECT COUNT(*) 
+		FROM BX_PROGRAM_TABLE 
+		WHERE "isDelete" = 'false' AND "registCode" = #{registCode}
+	</select>
+	
+	<select id="getProgramListWithRegistCode" resultMap="program_data_model" parameterType="map">
+		SELECT * 
+		FROM BX_PROGRAM_TABLE 
+		WHERE "isDelete" = 'false' AND "registCode" = #{registCode}
+		<if test="range != null and !range.equals('') and start != null and !start.equals('')">
+		LIMIT #{range, jdbcType=INTEGER} OFFSET #{start, jdbcType=INTEGER}
+		</if>
+	</select>
+	
+</mapper>

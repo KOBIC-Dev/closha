@@ -1,0 +1,38 @@
+namespace java org.kobic.bioexpress.model.script
+
+/**
+ *  bool        Boolean, one byte
+ *  byte        Signed byte
+ *  i16         Signed 16-bit integer
+ *  i32         Signed 32-bit integer
+ *  i64         Signed 64-bit integer
+ *  double      64-bit floating point value
+ *  string      String
+ *  map<t1,t2>  Map from one type to another
+ *  list<t1>    Ordered list of one type
+ *  set<t1>     Set of unique elements of one type
+ *
+ */
+
+typedef i32 int, 
+typedef i64 long
+typedef bool boolean
+
+struct ScriptModel{
+	1:string rawID  = "NA";
+	2:string scriptID = "NA";
+ 	3:string name = "NA";
+ 	4:string scriptType = "NA";
+ 	5:string savePath = "NA";
+ 	6:string parentPath = "NA";
+    7:string createDate = "NA";
+	8:string modifyDate = "NA";
+	9:string memberID = "NA";
+    10:string podmanID = "NA";
+    11:string podmanImgID = "NA";
+    12:string podmanRepo = "NA";
+	13:string podmanTag = "NA";
+	14:string timeStamp = "NA";
+	15:string podmanName = "NA";
+	16:boolean isDelete = false;
+}

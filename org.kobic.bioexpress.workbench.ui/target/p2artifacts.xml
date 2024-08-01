@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?artifactRepository version='1.1.0'?>
+<artifacts size='2'>
+  <artifact classifier='osgi.bundle' id='org.kobic.bioexpress.workbench.ui' version='2.0.0'>
+    <properties size='6'>
+      <property name='artifact.size' value='8695406'/>
+      <property name='download.size' value='8695406'/>
+      <property name='maven-groupId' value='org.kobic.bioexpress.workbench'/>
+      <property name='maven-artifactId' value='org.kobic.bioexpress.workbench.ui'/>
+      <property name='maven-version' value='2.0.0'/>
+      <property name='maven-type' value='eclipse-plugin'/>
+    </properties>
+  </artifact>
+  <artifact classifier='osgi.bundle' id='org.kobic.bioexpress.workbench.ui.source' version='2.0.0'>
+    <properties size='7'>
+      <property name='artifact.size' value='541997'/>
+      <property name='download.size' value='541997'/>
+      <property name='maven-groupId' value='org.kobic.bioexpress.workbench'/>
+      <property name='maven-artifactId' value='org.kobic.bioexpress.workbench.ui'/>
+      <property name='maven-version' value='2.0.0'/>
+      <property name='maven-classifier' value='sources'/>
+      <property name='maven-type' value='java-source'/>
+    </properties>
+  </artifact>
+</artifacts>

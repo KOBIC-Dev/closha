@@ -1,0 +1,101 @@
+include "bioexpress.channel.model.parameter.thrift.idl"
+
+namespace java org.kobic.bioexpress.model.task
+
+/**
+ *  bool        Boolean, one byte
+ *  byte        Signed byte
+ *  i16         Signed 16-bit integer
+ *  i32         Signed 32-bit integer
+ *  i64         Signed 64-bit integer
+ *  double      64-bit floating point value
+ *  string      String
+ *  map<t1,t2>  Map from one type to another
+ *  list<t1>    Ordered list of one type
+ *  set<t1>     Set of unique elements of one type
+ *
+ */
+
+typedef i32 int, 
+typedef i64 long
+typedef bool boolean
+
+typedef bioexpress.channel.model.parameter.thrift.ParameterModel ParameterModel
+
+struct TaskModel{
+	1:string rawID  = "NA";
+ 	2:string taskID = "NA";
+ 	3:string taskName = "NA";
+ 	4:string taskDesc = "NA";
+ 	5:string submissionTime = "NA";
+    6:string pipelineID = "NA";
+	7:string pipelineName = "NA";
+	8:string workspaceName = "NA";
+    9:string memberID = "NA";
+	10:string status = "NA"; 
+	11:string timeStamp = "NA";
+	12:boolean isDelete = false;
+}
+
+struct SubTaskModel{
+	1:string rawID = "NA";
+	2:string nodeID = "NA";
+	3:string taskID = "NA";
+ 	4:string subTaskID = "NA";
+ 	5:string submissionTime = "NA";
+	6:string nodeName = "NA";
+	7:string programName = "NA";
+  	8:string pipelineID = "NA";
+	9:string pipelineName = "NA";
+	10:string workspaceName = "NA";
+  	11:string memberID = "NA";
+	12:string status = "NA";
+	13:string timeStamp = "NA";
+ 	14:boolean isSingle = false;
+}
+
+struct ScriptTaskModel{
+	1:string rawID = "NA";
+	2:string jobID = "NA";
+ 	3:string scriptName = "NA";
+	4:string scriptFile = "NA";	
+ 	5:string language = "NA";
+ 	6:string memberID = "NA";
+ 	7:string submissionTime = "NA";
+	8:string finalCompleteTime = "NA";
+    9:string stderrPath = "NA";
+ 	10:string stdoutPath = "NA";
+	11:string status = "NA"; 
+	12:string timeStamp = "NA";
+	13:string repo = "NA";
+	14:string tag = "NA";
+	15:string env = "NA";
+	16:boolean isDelete = false;
+}
+
+struct TimerScheduleTransferModel{
+	1:string id = "NA";
+	2:string name = "NA";
+	3:string taskType = "NA";
+	4:string userID = "NA";
+	5:string startTime = "NA";
+	6:string runTime = "NA";
+	7:int total = 0;
+}
+
+struct TaskResponseModel{
+	1:string rawID = "NA";
+	2:string status = "NA";
+}
+
+struct SubTaskResponseModel{
+	1:string pRawID = "NA";
+	2:string pStatus = "NA";
+	3:string nRawID = "NA";
+	4:string nStatus = "NA";
+}
+
+struct ScriptTaskResponseModel{
+	1:string rawID = "NA";
+	2:string status = "NA";
+}

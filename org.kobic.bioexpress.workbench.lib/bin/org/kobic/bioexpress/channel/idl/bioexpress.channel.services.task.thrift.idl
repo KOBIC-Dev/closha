@@ -1,0 +1,71 @@
+include "bioexpress.channel.model.admin.thrift.idl"
+include "bioexpress.channel.model.category.thrift.idl"
+include "bioexpress.channel.model.cluster.thrift.idl"
+include "bioexpress.channel.model.common.thrift.idl"
+include "bioexpress.channel.model.file.thrift.idl"
+include "bioexpress.channel.model.gbox.thrift.idl"
+include "bioexpress.channel.model.log.thrift.idl"
+include "bioexpress.channel.model.parameter.thrift.idl"
+include "bioexpress.channel.model.pipeline.thrift.idl"
+include "bioexpress.channel.model.program.thrift.idl"
+include "bioexpress.channel.model.task.thrift.idl"
+include "bioexpress.channel.model.workspace.thrift.idl"
+
+include "bioexpress.channel.services.db.category.thrift.idl"
+include "bioexpress.channel.services.db.pipeline.thrift.idl"
+include "bioexpress.channel.services.db.program.thrift.idl"
+include "bioexpress.channel.services.db.workspace.thrift.idl"
+
+include "bioexpress.channel.services.closha.thrift.idl"
+
+namespace java org.kobic.bioexpress.channel.service.task
+
+/**
+ *  bool        Boolean, one byte
+ *  byte        Signed byte
+ *  i16         Signed 16-bit integer
+ *  i32         Signed 32-bit integer
+ *  i64         Signed 64-bit integer
+ *  double      64-bit floating point value
+ *  string      String
+ *  map<t1,t2>  Map from one type to another
+ *  list<t1>    Ordered list of one type
+ *  set<t1>     Set of unique elements of one type
+ */
+
+typedef i32 int, 
+typedef i64 long
+typedef bool boolean
+
+typedef bioexpress.channel.model.parameter.thrift.ParameterModel parameterModel
+
+typedef bioexpress.channel.model.pipeline.thrift.PipelineModel pipelineModel
+typedef bioexpress.channel.model.pipeline.thrift.NodeModel nodeModel
+typedef bioexpress.channel.model.task.thrift.TimerScheduleTransferModel timerScheduleTransferModel
+typedef bioexpress.channel.model.task.thrift.ScriptTaskModel scriptTaskModel
+typedef bioexpress.channel.model.task.thrift.TaskResponseModel taskResponseModel
+typedef bioexpress.channel.model.task.thrift.SubTaskResponseModel subTaskResponseModel
+typedef bioexpress.channel.model.task.thrift.ScriptTaskResponseModel scriptTaskResponseModel
+
+service TaskService {
+
+	scriptTaskResponseModel executeScriptTask(1:string userID, 2:string script, 3:string repo, 4:string tag, 5:string env),
+	
+	subTaskResponseModel executeSingleNodeJob(1:nodeModel nodeModel, 2:string workspaceName, 3:string pipelineID, 
+										4:string pipelineName, 5:string taskID, 6:string userID, 7:string userEmail, 8:string pRawID),
+
+	taskResponseModel executePipelineTask(1:pipelineModel pipelineModel, 2:string workspaceName, 3:string userID, 4:string userEmail),
+
+	subTaskResponseModel stopSingleNodeJob(1:nodeModel nodeModel, 2:pipelineModel pipelineModel),
+
+	taskResponseModel stopPipelineTask(1:pipelineModel pipelineModel),
+
+	scriptTaskResponseModel stopScriptTask(1:string rawID, 2:string jobID),
+
+	list<timerScheduleTransferModel> getAllTimerScheduler(),
+
+	list<timerScheduleTransferModel> getTimerScheduler(1:int start, 2:int range),
+
+	void removeTimerScheduler(1:string pipelineID),
+
+}

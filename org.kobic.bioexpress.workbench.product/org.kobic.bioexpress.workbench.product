@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<product name="product" uid="product" id="org.kobic.bioexpress.workbench.ui.product" application="org.kobic.bioexpress.workbench.ui.application" version="2.0.0" useFeatures="true" includeLaunchers="true" autoIncludeRequirements="true">
+
+   <aboutInfo>
+      <text>
+         http://Footeware.ca
+      </text>
+   </aboutInfo>
+
+   <configIni use="default">
+   </configIni>
+
+   <launcherArgs>
+      <programArgs>-clearPersistedState
+      </programArgs>
+      <vmArgs>-Djava.awt.headless=false
+      </vmArgs>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
+      </vmArgsMac>
+      <vmArgsWin>-Djava.library.path=./jcef64 -Djava.awt.headless=false
+         <argsX86_64>-Djava.library.path=./jcef64 -Djava.awt.headless=false</argsX86_64>
+      </vmArgsWin>
+   </launcherArgs>
+
+   <windowImages i16="/org.kobic.bioexpress.workbench.product/icons/png/closha_16.png" i32="/org.kobic.bioexpress.workbench.product/icons/png/closha_32.png" i48="/org.kobic.bioexpress.workbench.product/icons/png/closha_48.png" i64="/org.kobic.bioexpress.workbench.product/icons/png/closha_64.png" i128="/org.kobic.bioexpress.workbench.product/icons/png/closha_128.png" i256="/org.kobic.bioexpress.workbench.product/icons/png/closha_256.png"/>
+
+   <splash
+      location="org.kobic.bioexpress.workbench.ui"
+      startupProgressRect="5,275,445,15"
+      startupMessageRect="7,252,445,20"
+      startupForegroundColor="000000" />
+   <launcher name="CLOSHA">
+      <linux icon="/org.kobic.bioexpress.workbench.product/icons/icon.xpm"/>
+      <macosx icon="/org.kobic.bioexpress.workbench.product/icons/icns/closha_128.icns"/>
+      <win useIco="false">
+         <bmp
+            winSmallHigh="/org.kobic.bioexpress.workbench.product/icons/bmp_32/closha_16.bmp"
+            winSmallLow="/org.kobic.bioexpress.workbench.product/icons/bmp_8/closha_16.bmp"
+            winMediumHigh="/org.kobic.bioexpress.workbench.product/icons/bmp_32/closha_32.bmp"
+            winMediumLow="/org.kobic.bioexpress.workbench.product/icons/bmp_8/closha_32.bmp"
+            winLargeHigh="/org.kobic.bioexpress.workbench.product/icons/bmp_32/closha_48.bmp"
+            winLargeLow="/org.kobic.bioexpress.workbench.product/icons/bmp_8/closha_48.bmp"
+            winExtraLargeHigh="/org.kobic.bioexpress.workbench.product/icons/bmp_32/closha_256.bmp"/>
+      </win>
+   </launcher>
+
+   <vm>
+      <windows include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8</windows>
+   </vm>
+
+   <license>
+        <url>https://www.eclipse.org/legal/epl-2.0/</url>
+        <text>
+   Eclipse Public License - v 2.0
+
+    THE ACCOMPANYING PROGRAM IS PROVIDED UNDER THE TERMS OF THIS ECLIPSE
+    PUBLIC LICENSE (&quot;AGREEMENT&quot;). ANY USE, REPRODUCTION OR DISTRIBUTION
+    OF THE PROGRAM CONSTITUTES RECIPIENT&apos;S ACCEPTANCE OF THIS AGREEMENT.
+
+1. DEFINITIONS
+         </text>
+   </license>
+
+   <plugins>
+   </plugins>
+
+   <features>
+      <feature id="org.eclipse.e4.rcp" installMode="root"/>
+      <feature id="org.eclipse.emf.ecore" installMode="root"/>
+      <feature id="org.eclipse.emf.common" installMode="root"/>
+      <feature id="org.eclipse.equinox.p2.core.feature" installMode="root"/>
+      <feature id="org.eclipse.ecf.core.ssl.feature" installMode="root"/>
+      <feature id="org.eclipse.ecf.filetransfer.ssl.feature" installMode="root"/>
+      <feature id="org.eclipse.ecf.core.feature" installMode="root"/>
+      <feature id="org.eclipse.ecf.filetransfer.feature" installMode="root"/>
+      <feature id="org.kobic.bioexpress.workbench.feature" installMode="root"/>
+      <feature id="org.eclipse.ecf.filetransfer.httpclient5.feature" installMode="root"/>
+   </features>
+
+   <configurations>
+      <plugin id="org.apache.felix.scr" autoStart="true" startLevel="4" />
+      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="3" />
+      <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.event" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
+      <plugin id="org.eclipse.osgi" autoStart="true" startLevel="-1" />
+   </configurations>
+
+   <repositories>
+      <repository location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+      <repository location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+      <repository location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+      <repository location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+      <repository location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+      <repository location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+      <repository location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+      <repository location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+      <repository location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+      <repository location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+      <repository location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+      <repository location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+      <repository location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+      <repository location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+      <repository location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+      <repository location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+      <repository location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+      <repository location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+      <repository location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+      <repository location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+      <repository location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+      <repository location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+      <repository location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+      <repository location="http://download.eclipse.org/eclipse/updates/4.12/" enabled="true" />
+   </repositories>
+
+   <preferencesInfo>
+      <targetfile overwrite="true"/>
+   </preferencesInfo>
+
+   <cssInfo>
+      <file path="/org.kobic.bioexpress.workbench.ui/css/default.css"/>
+   </cssInfo>
+
+</product>

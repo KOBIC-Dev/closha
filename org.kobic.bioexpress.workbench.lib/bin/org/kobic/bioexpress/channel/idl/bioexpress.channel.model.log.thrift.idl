@@ -1,0 +1,85 @@
+include "bioexpress.channel.model.parameter.thrift.idl"
+
+namespace java org.kobic.bioexpress.model.log
+
+/**
+ *  bool        Boolean, one byte
+ *  byte        Signed byte
+ *  i16         Signed 16-bit integer
+ *  i32         Signed 32-bit integer
+ *  i64         Signed 64-bit integer
+ *  double      64-bit floating point value
+ *  string      String
+ *  map<t1,t2>  Map from one type to another
+ *  list<t1>    Ordered list of one type
+ *  set<t1>     Set of unique elements of one type
+ *
+ */
+
+typedef i32 int, 
+typedef i64 long
+typedef bool boolean
+
+typedef bioexpress.channel.model.parameter.thrift.ParameterModel ParameterModel
+
+struct JobLogModel{
+	1:string rawID = "NA";
+	2:string pipelineID = "NA";
+ 	3:string nodeID = "NA";
+ 	4:string jobID = "NA";
+ 	5:string subTaskID = "NA";
+ 	6:string memberID = "NA";
+ 	7:string submissionTime = "NA";
+    8:string stderrPath = "NA";
+ 	9:string stdoutPath = "NA";
+ 	10:string scriptFile = "NA";	
+}
+
+struct JobDetailLogModel{
+	1:string rawID = "NA";
+	2:string nodeID = "NA";
+    3:string jobNumber = "NA";
+	4:string execFile = "NA";
+ 	5:string submissionTime = "NA";
+ 	6:string owner = "NA";
+ 	7:string uid = "NA";
+	8:string userGroup = "NA";
+ 	9:string gid = "NA";
+ 	10:string sgeHome = "NA";
+ 	11:string sgeLogName = "NA";
+ 	12:string sgeShell = "NA";
+ 	13:string sgeWorkdir = "NA";
+ 	14:string sgeHost = "NA";
+ 	15:string account = "NA";
+ 	16:string stderrPathList = "NA";
+ 	17:string stdoutPathList = "NA";
+ 	18:string hardQueueList = "NA";
+ 	19:string jobName = "NA";
+ 	20:string shellList = "NA";
+ 	21:string jobArgs = "NA";
+ 	22:string scriptFile = "NA";
+	23:string timeStamp = "NA";
+}
+
+struct LogDataModel{
+	1:string rawID = "NA";
+	2:string nodeID = "NA"
+	3:string jobID = "NA";
+	4:string endTime = "NA";
+	5:string stdout = "NA";
+	6:string stderr = "NA";
+}
+
+struct JobResourceUsageLogDataModel{
+	1:string rawID = "NA";
+	2:string nodeID = "NA";
+ 	3:string jobID = "NA";
+ 	4:string cpu = "00:00:00";
+	5:string mem = "0";
+	6:string io = "0";
+	7:string vmem = "0";
+	8:string maxvmem = "0";
+	9:string timeStamp = "NA";
+	10:string memberID = "NA";
+	11:string pipelineID = "NA";
+}

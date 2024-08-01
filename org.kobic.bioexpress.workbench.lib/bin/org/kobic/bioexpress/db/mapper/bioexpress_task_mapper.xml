@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.kobic.bioexpress.db.dto.task.TaskDto">
+
+	<parameterMap type="org.kobic.bioexpress.model.task.TaskModel" id="task"></parameterMap>
+	<parameterMap type="org.kobic.bioexpress.model.task.SubTaskModel" id="sub_task"></parameterMap>
+	<parameterMap type="org.kobic.bioexpress.model.task.ScriptTaskModel" id="script_task"></parameterMap>
+	
+	<resultMap id="task_model" type="org.kobic.bioexpress.model.task.TaskModel">
+		<result property="rawID"			column="RAW_ID" />
+		<result property="taskID"			column="TASK_ID" />
+		<result property="taskName"			column="TASK_NAME" />
+		<result property="taskDesc" 	    column="TASK_DESC" />
+		<result property="submissionTime"   column="SUBMISSION_TIME" />
+		<result property="pipelineID" 	    column="PIPELINE_ID" />
+		<result property="pipelineName" 	column="PIPELINE_NAME" />
+		<result property="workspaceName" 	column="WORKSPACE_NAME" />
+		<result property="memberID"			column="MEMBER_ID" />
+		<result property="status"			column="STATUS" />
+		<result property="timeStamp"		column="TIME_STAMP" />
+		<result property="isDelete"			column="IS_DELETE" />
+	</resultMap>
+	
+	<resultMap id="sub_task_model" type="org.kobic.bioexpress.model.task.SubTaskModel">
+		<result property="rawID"			column="RAW_ID" />
+		<result property="nodeID"			column="NODE_ID" />
+		<result property="taskID"			column="TASK_ID" />
+		<result property="subTaskID" 	    column="SUB_TASK_ID" />
+		<result property="submissionTime" 	column="SUBMISSION_TIME" />
+		<result property="nodeName" 		column="NODE_NAME" />
+		<result property="programName" 		column="PROGRAM_NAME" />
+		<result property="pipelineID" 	    column="PIPELINE_ID" />
+		<result property="pipelineName" 	column="PIPELINE_NAME" />
+		<result property="workspaceName" 	column="WORKSPACE_NAME" />
+		<result property="memberID" 	    column="MEMBER_ID" />
+		<result property="status" 	    	column="STATUS" />
+		<result property="timeStamp" 	    column="TIME_STAMP" />
+		<result property="isSingle" 	    column="IS_SINGLE" />
+	</resultMap>
+	
+	<resultMap id="script_task_model" type="org.kobic.bioexpress.model.task.ScriptTaskModel">
+		<result property="rawID"				column="RAW_ID" />
+		<result property="jobID"				column="JOB_ID" />
+		<result property="scriptName"			column="SCRIPT_NAME" />
+		<result property="scriptFile" 	    	column="SCRIPT_FILE" />
+		<result property="language" 			column="LANGUAGE" />
+		<result property="memberID" 			column="MEMBER_ID" />
+		<result property="submissionTime" 		column="SUBMISSION_TIME" />
+		<result property="finalCompleteTime"	column="FINAL_COMPLETE_TIME" />
+		<result property="stderrPath" 			column="STD_ERR_PATH" />
+		<result property="stdoutPath" 			column="STD_OUT_PATH" />
+		<result property="status" 	    		column="STATUS" />
+		<result property="timeStamp" 	    	column="TIMESTAMP" />
+		<result property="repo" 	    		column="REPO" />
+		<result property="tag" 	    			column="TAG" />
+		<result property="env" 	    			column="ENV" />
+		<result property="isDelete" 	   		column="IS_DELETE" />
+	</resultMap>
+	
+	<resultMap id="sub_task_join_job_model" type="org.kobic.bioexpress.model.task.SubTaskJoinJobModel">
+		<result property="rawID"						column="RAW_ID" />
+		<result property="nodeID"						column="NODE_ID" />
+		<result property="taskID"						column="TASK_ID" />
+		<result property="subTaskID" 	    			column="SUB_TASK_ID" />
+		<result property="submissionTime" 				column="SUBMISSION_TIME" />
+		<result property="nodeName" 					column="NODE_NAME" />
+		<result property="programName" 					column="PROGRAM_NAME" />
+		<result property="pipelineID" 	    			column="PIPELINE_ID" />
+		<result property="pipelineName" 				column="PIPELINE_NAME" />
+		<result property="workspaceName" 				column="WORKSPACE_NAME" />
+		<result property="memberID" 	    			column="MEMBER_ID" />
+		<result property="status" 	    				column="STATUS" />
+		<result property="submissionTime"   			column="TIME_STAMP" />
+		<result property="isSingle" 	    			column="IS_SINGLE" />
+		<result property="jobID" 	    				column="JOB_ID" />
+		<result property="stderrPath"    				column="STDERR_PATH" />
+		<result property="stdoutPath"    				column="STDOUT_PATH" />
+		<result property="jobLogScriptFile"    			column="JOB_LOG_SCRIPT_FILE" />
+		<result property="execFile"    					column="EXEC_FILE" />
+		<result property="jobName"    					column="JOB_NAME" />
+		<result property="shellList"    				column="SHELL_LIST" />
+		<result property="jobArgs"    					column="JOB_ARGS" />
+		<result property="jobLogDetailScriptFile"    	column="JOB_LOG_DETAIL_SCRIPT_FILE" />
+	</resultMap>
+
+	<insert id="insertTask" parameterMap="task">
+		UPSERT INTO
+			BX_TASK_TABLE(
+				RAW_ID, TASK_ID, TASK_NAME,
+				TASK_DESC, SUBMISSION_TIME, PIPELINE_ID, 
+				PIPELINE_NAME, WORKSPACE_NAME, MEMBER_ID,
+				STATUS, TIME_STAMP, IS_DELETE
+			)
+			VALUES(
+				#{rawID}, #{taskID}, #{taskName}, 
+				#{taskDesc}, #{submissionTime}, #{pipelineID},
+				#{pipelineName}, #{workspaceName}, #{memberID}, 
+				#{status}, #{timeStamp}, #{isDelete}
+			)
+	</insert>
+	
+	<update id="updateTaskStatus" parameterType="map">
+		UPSERT INTO
+			BX_TASK_TABLE(
+				RAW_ID,	STATUS
+			)
+		VALUES(
+			#{rawID}, #{status}
+			) 
+	</update>
+	
+	<select id="getTask" resultMap="task_model" parameterType="map">
+		SELECT * FROM BX_TASK_TABLE WHERE PIPELINE_ID = #{pipelineID} AND TASK_ID = #{taskID}
+	</select>
+	
+	<select id="getTaskByRawId" resultMap="task_model" parameterType="map">
+		SELECT * FROM BX_TASK_TABLE WHERE RAW_ID = #{rawID}
+	</select>
+	
+	<select id="getTaskTotalCount" resultType="java.lang.Integer" parameterType="string">
+		SELECT COUNT(*) FROM BX_TASK_TABLE WHERE IS_DELETE = FALSE
+	</select>
+
+	<select id="getAllTask" resultMap="task_model" parameterType="string">
+		SELECT * FROM BX_TASK_TABLE 
+		WHERE IS_DELETE = FALSE 
+		<if test="pipelineID != null and !pipelineID.equals('')">
+		AND PIPELINE_ID = #{pipelineID}
+		</if>
+		<if test="range != null and !range.equals('') and start != null and !start.equals('')">
+		LIMIT #{range, jdbcType=INTEGER} OFFSET #{start, jdbcType=INTEGER}
+		</if>
+	</select>
+	
+	<select id="getTaskTotalCountByPipeline" resultType="java.lang.Integer" parameterType="map">
+		SELECT COUNT(*) FROM BX_TASK_TABLE WHERE PIPELINE_ID = #{pipelineID}
+	</select>
+
+	<select id="getTaskByPipeline" resultMap="task_model" parameterType="map">
+		SELECT * FROM BX_TASK_TABLE WHERE PIPELINE_ID = #{pipelineID}
+		<if test="range != null and !range.equals('') and start != null and !start.equals('')">
+		LIMIT #{range, jdbcType=INTEGER} OFFSET #{start, jdbcType=INTEGER}
+		</if>
+	</select>
+	
+	<select id="getMyTaskTotalCount" resultType="java.lang.Integer" parameterType="map">
+		SELECT COUNT(*) FROM BX_TASK_TABLE 
+		WHERE MEMBER_ID = #{memberID}
+		AND IS_DELETE = FALSE
+	</select>
+	
+	<select id="getMyTask" resultMap="task_model" parameterType="map">
+		SELECT * FROM BX_TASK_TABLE
+		WHERE MEMBER_ID = #{memberID}
+		AND IS_DELETE = FALSE
+		<if test="range != null and !range.equals('') and start != null and !start.equals('')">
+		LIMIT #{range, jdbcType=INTEGER} OFFSET #{start, jdbcType=INTEGER}
+		</if>
+	</select>
+	
+	<select id="getTaskTotalCountByWorkspaceID" resultType="java.lang.Integer" parameterType="map">
+		SELECT count(*) 
+		FROM BX_TASK_TABLE t, BX_PIPELINE_TABLE p 
+		WHERE p."workspaceID" = #{workspaceID} AND t.PIPELINE_ID = p."pipelineID" AND t.IS_DELETE = FALSE AND p."isDelete" = 'false'
+	</select>
+	
+	<select id="getTaskByWorkspaceID" resultMap="task_model" parameterType="map">
+		SELECT 
+			t.RAW_ID          AS RAW_ID, 
+			t.TASK_ID         AS TASK_ID,
+			t.TASK_NAME       AS TASK_NAME, 
+			t.TASK_DESC       AS TASK_DESC, 
+			t.SUBMISSION_TIME AS SUBMISSION_TIME, 
+			t.PIPELINE_ID     AS PIPELINE_ID, 
+			t.MEMBER_ID       AS MEMBER_ID, 
+			t.STATUS          AS STATUS, 
+			t.IS_DELETE       AS IS_DELETE  
+		FROM BX_TASK_TABLE t, BX_PIPELINE_TABLE p 
+		WHERE p."workspaceID" = #{workspaceID} AND t.PIPELINE_ID = p."pipelineID"  AND t.IS_DELETE = FALSE AND p."isDelete" = 'false'
+		<if test="range != null and !range.equals('') and start != null and !start.equals('')">
+		LIMIT #{range, jdbcType=INTEGER} OFFSET #{start, jdbcType=INTEGER}
+		</if>
+	</select>
+	
+	<select id="getTaskTotalCountByStatus" resultType="java.lang.Integer" parameterType="map">
+		SELECT COUNT(*) 
+		FROM BX_TASK_TABLE 
+		WHERE IS_DELETE = FALSE
+		AND STATUS = #{status}
+		<if test="memberID != null and !memberID.equals('')">
+		AND MEMBER_ID = #{memberID}
+		</if>
+	</select>
+	
+	<!-- sub task -->
+	<insert id="insertSubTask" parameterMap="sub_task">
+		UPSERT INTO
+			BX_SUB_TASK_TABLE(
+				RAW_ID, NODE_ID, TASK_ID,
+				SUB_TASK_ID, SUBMISSION_TIME, NODE_NAME,
+				PROGRAM_NAME, PIPELINE_ID, PIPELINE_NAME,
+				WORKSPACE_NAME, MEMBER_ID,STATUS,
+				TIME_STAMP, IS_SINGLE
+			)
+			VALUES(
+				#{rawID}, #{nodeID}, #{taskID}, 
+				#{subTaskID}, #{submissionTime}, #{nodeName},
+				#{programName},#{pipelineID},#{pipelineName},
+				#{workspaceName}, #{memberID}, #{status},
+				#{timeStamp},#{isSingle}
+			)
+	</insert>
+		
+	<update id="updateSubTaskStatus" parameterType="map">
+		UPSERT INTO
+			BX_SUB_TASK_TABLE(
+				RAW_ID,	STATUS
+			)
+		VALUES(
+			#{rawID}, #{status}
+			) 
+	</update>
+		
+	<select id="getAllSubTask" resultMap="sub_task_model" parameterType="string">
+		SELECT * FROM BX_SUB_TASK_TABLE WHERE NODE_ID = #{nodeID}
+	</select>	
+		
+	<select id="getSubTask" resultMap="sub_task_model" parameterType="map">
+		SELECT * FROM BX_SUB_TASK_TABLE WHERE NODE_ID = #{nodeID} AND SUB_TASK_ID = #{subTaskID}
+	</select>
+
+	<select id="getSubTaskListTotalCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM BX_SUB_TASK_TABLE
+	</select>
+	
+	<select id="getSubTaskList" resultMap="sub_task_model" parameterType="map">
+		SELECT * FROM BX_SUB_TASK_TABLE
+		<if test="range != null and !range.equals('') and start != null and !start.equals('')">
+		LIMIT #{range, jdbcType=INTEGER} OFFSET #{start, jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<select id="getMySubTaskListTotalCount" resultType="java.lang.Integer" parameterType="map">
+		SELECT COUNT(*) FROM BX_SUB_TASK_TABLE
+		WHERE MEMBER_ID = #{memberID}
+	</select>
+	
+	<select id="getMySubTaskList" resultMap="sub_task_model" parameterType="map">
+		SELECT * FROM BX_SUB_TASK_TABLE
+		WHERE MEMBER_ID = #{memberID}
+		ORDER  BY SUBMISSION_TIME DESC, PIPELINE_ID
+		<if test="range != null and !range.equals('') and start != null and !start.equals('')">
+		LIMIT #{range, jdbcType=INTEGER} OFFSET #{start, jdbcType=INTEGER}
+		</if>
+	</select>
+	
+	<select id="getSubTaskTotalCountByStatus" parameterType="map" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM BX_SUB_TASK_TABLE WHERE STATUS = #{status}
+	</select>
+
+	<select id="getSubTaskByStatus" parameterType="map" resultMap="sub_task_model">
+		SELECT * FROM BX_SUB_TASK_TABLE WHERE STATUS = #{status}
+		<if test="range != null and !range.equals('') and start != null and !start.equals('')">
+		LIMIT #{range, jdbcType=INTEGER} OFFSET #{start, jdbcType=INTEGER}
+		</if>
+	</select>
+	
+	<select id="getSubTaskJoinInfoByPipelineIDTotalCount" parameterType="map" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM BX_SUB_TASK_TABLE S 
+		INNER JOIN BX_JOB_LOG_TABLE J 
+		ON S.SUB_TASK_ID = J.SUB_TASK_ID
+		INNER JOIN BX_JOB_DETAIL_LOG_TABLE D
+		ON J.JOB_ID = D.JOB_NUMBER 
+		WHERE s.PIPELINE_ID = #{pipelineID}
+	</select>
+
+	<select id="getSubTaskJoinInfoByPipelineID" parameterType="map" resultMap="sub_task_join_job_model">
+		SELECT S.RAW_ID			 AS RAW_ID, 
+			   S.NODE_ID		 AS NODE_ID, 
+			   S.TASK_ID		 AS TASK_ID, 
+			   S.SUB_TASK_ID     AS SUB_TASK_ID,
+			   S.SUBMISSION_TIME AS SUBMISSION_TIME, 
+			   S.NODE_NAME		 AS NODE_NAME, 
+			   S.PROGRAM_NAME	 AS PROGRAM_NAME, 
+			   S.PIPELINE_ID 	 AS PIPELINE_ID, 
+			   S.PIPELINE_NAME	 AS PIPELINE_NAME, 
+			   S.WORKSPACE_NAME  AS WORKSPACE_NAME, 
+			   S.MEMBER_ID		 AS MEMBER_ID, 
+			   S.STATUS			 AS STATUS, 
+			   S.IS_SINGLE		 AS IS_SINGLE,
+	   		   J.JOB_ID			 AS JOB_ID, 
+	   		   J.STDERR_PATH	 AS STDERR_PATH,	
+	   		   J.STDOUT_PATH	 AS STDOUT_PATH, 
+	   		   J.SCRIPT_FILE	 AS SCRIPT_FILE,
+	   		   D.EXEC_FILE		 AS EXEC_FILE, 
+	   		   D.JOB_NAME		 AS JOB_NAME, 
+	   		   D.SHELL_LIST		 AS SHELL_LIST, 
+	   		   D.JOB_ARGS		 AS JOB_ARGS, 
+	   		   D.SCRIPT_FILE	 AS SCRIPT_FILE	
+		FROM BX_SUB_TASK_TABLE S 
+		INNER JOIN BX_JOB_LOG_TABLE J 
+		ON s.SUB_TASK_ID = j.SUB_TASK_ID
+		INNER JOIN BX_JOB_DETAIL_LOG_TABLE D
+		ON j.JOB_ID = d.JOB_NUMBER
+		AND j.NODE_ID = d.NODE_ID
+		WHERE s.PIPELINE_ID = #{pipelineID}
+		<if test="range != null and !range.equals('') and start != null and !start.equals('')">
+		LIMIT #{range, jdbcType=INTEGER} OFFSET #{start, jdbcType=INTEGER}
+		</if>
+	</select>
+
+	<select id="getSubTaskJoinInfo" parameterType="map" resultMap="sub_task_join_job_model">
+		SELECT S.RAW_ID			 AS RAW_ID, 
+			   S.NODE_ID		 AS NODE_ID, 
+			   S.TASK_ID		 AS TASK_ID, 
+			   S.SUB_TASK_ID     AS SUB_TASK_ID,
+			   S.SUBMISSION_TIME AS SUBMISSION_TIME, 
+			   S.NODE_NAME		 AS NODE_NAME, 
+			   S.PROGRAM_NAME	 AS PROGRAM_NAME, 
+			   S.PIPELINE_ID 	 AS PIPELINE_ID, 
+			   S.PIPELINE_NAME	 AS PIPELINE_NAME, 
+			   S.WORKSPACE_NAME  AS WORKSPACE_NAME, 
+			   S.MEMBER_ID		 AS MEMBER_ID, 
+			   S.STATUS			 AS STATUS, 
+			   S.IS_SINGLE		 AS IS_SINGLE,
+	   		   J.JOB_ID			 AS JOB_ID, 
+	   		   J.STDERR_PATH	 AS STDERR_PATH,	
+	   		   J.STDOUT_PATH	 AS STDOUT_PATH, 
+	   		   J.SCRIPT_FILE	 AS JOB_LOG_SCRIPT_FILE,
+	   		   D.EXEC_FILE		 AS EXEC_FILE, 
+	   		   D.JOB_NAME		 AS JOB_NAME, 
+	   		   D.SHELL_LIST		 AS SHELL_LIST, 
+	   		   D.JOB_ARGS		 AS JOB_ARGS, 
+	   		   D.SCRIPT_FILE	 AS JOB_LOG_DETAIL_SCRIPT_FILE	
+		FROM BX_SUB_TASK_TABLE S 
+		INNER JOIN BX_JOB_LOG_TABLE J 
+		ON S.SUB_TASK_ID = J.SUB_TASK_ID
+		INNER JOIN BX_JOB_DETAIL_LOG_TABLE D
+		ON J.JOB_ID = D.JOB_NUMBER 
+		AND J.NODE_ID = D.NODE_ID
+		WHERE S.RAW_ID = #{rawID}
+	</select>
+	
+	<insert id="insertScriptTask" parameterMap="script_task">
+		UPSERT INTO
+			BX_SCRIPT_TASK_TABLE(
+				RAW_ID, JOB_ID, SCRIPT_NAME,
+				SCRIPT_FILE, LANGUAGE, MEMBER_ID, 
+				SUBMISSION_TIME, FINAL_COMPLETE_TIME, STD_ERR_PATH,
+				STD_OUT_PATH, STATUS, TIMESTAMP, REPO, TAG, ENV, IS_DELETE
+			)
+			VALUES(
+				#{rawID}, #{jobID}, #{scriptName}, 
+				#{scriptFile}, #{language}, #{memberID},
+				#{submissionTime}, #{finalCompleteTime}, #{stderrPath}, 
+				#{stdoutPath}, #{status}, #{timeStamp}, 
+				#{repo}, #{tag}, #{env}, 
+				#{isDelete}
+			)
+	</insert>
+	
+	<update id="updateScriptTaskStatusAndFinalCompleteTime" parameterType="map">
+		UPSERT INTO
+			BX_SCRIPT_TASK_TABLE(
+				RAW_ID,	STATUS, FINAL_COMPLETE_TIME
+			)
+		VALUES(
+			#{rawID}, #{status}, #{finalCompleteTime}
+			) 
+	</update>
+	
+	<select id="getScriptTaskByMember" resultMap="script_task_model" parameterType="map">
+		SELECT * FROM BX_SCRIPT_TASK_TABLE WHERE MEMBER_ID = #{memberID} AND JOB_ID IS NOT NULL ORDER BY JOB_ID DESC LIMIT 100
+	</select>
+	
+	<insert id= "deleteScriptTask" parameterType="map">
+		UPSERT INTO
+			BX_SCRIPT_TASK_TABLE(
+				RAW_ID, IS_DELETE
+			)
+			VALUES(
+				#{rawID}, #{isDelete}
+			)
+	</insert>
+	
+	<select id="getScriptTask" resultMap="script_task_model" parameterType="map">
+		SELECT * FROM BX_SCRIPT_TASK_TABLE WHERE RAW_ID = #{rawID}
+	</select>
+	
+	<select id="getAllScriptTask" resultMap="script_task_model" parameterType="map">
+		SELECT * FROM BX_SCRIPT_TASK_TABLE
+	</select>
+	
+</mapper>

@@ -1,0 +1,68 @@
+include "bioexpress.channel.model.admin.thrift.idl"
+include "bioexpress.channel.model.category.thrift.idl"
+include "bioexpress.channel.model.cluster.thrift.idl"
+include "bioexpress.channel.model.common.thrift.idl"
+include "bioexpress.channel.model.file.thrift.idl"
+include "bioexpress.channel.model.gbox.thrift.idl"
+include "bioexpress.channel.model.log.thrift.idl"
+include "bioexpress.channel.model.parameter.thrift.idl"
+include "bioexpress.channel.model.pipeline.thrift.idl"
+include "bioexpress.channel.model.program.thrift.idl"
+include "bioexpress.channel.model.task.thrift.idl"
+include "bioexpress.channel.model.workspace.thrift.idl"
+
+include "bioexpress.channel.services.db.category.thrift.idl"
+include "bioexpress.channel.services.db.pipeline.thrift.idl"
+include "bioexpress.channel.services.db.program.thrift.idl"
+include "bioexpress.channel.services.db.workspace.thrift.idl"
+
+include "bioexpress.channel.services.closha.thrift.idl"
+
+namespace java org.kobic.bioexpress.channel.service.file
+
+/**
+ *  bool        Boolean, one byte
+ *  byte        Signed byte
+ *  i16         Signed 16-bit integer
+ *  i32         Signed 32-bit integer
+ *  i64         Signed 64-bit integer
+ *  double      64-bit floating point value
+ *  string      String
+ *  map<t1,t2>  Map from one type to another
+ *  list<t1>    Ordered list of one type
+ *  set<t1>     Set of unique elements of one type
+ */
+
+typedef i32 int, 
+typedef i64 long
+typedef bool boolean
+
+typedef bioexpress.channel.model.file.thrift.FileModel fileModel
+
+
+service FileUtilsService {
+	
+	fileModel getFile(1:string path),
+	list<fileModel> getFiles(1:string path),
+	list<string> getSubFiles(1:string path),
+	boolean makeDir(1:string path, 2:string name),
+	boolean makeDirs(1:string path),
+	boolean createFile(1:string path),
+	list<string> readFile(1:string path),
+	list<string> readLine(1:string path, 2:int n),
+	list<string> reverseReader(1:string path, 2:int n),
+
+	boolean isExist(1:string path),
+	boolean writeFile(1:string path, 2:string code),
+	boolean renameFile(1:string source, 2:string target),
+	boolean renameDir(1:string source, 2:string target),	
+	void deleteDir(1:string path),
+	void deleteFile(1:string path),
+	void forceDelete(1:string path),
+	boolean copyFile(1:string source, 2:string target),
+	boolean copySubdirectories(1:string source, 2:string target),
+	boolean move(1:string source, 2:string target),
+	boolean createSymbolic(1:string source, 2:string target),	
+
+	long getDirSize(1:string path),
+}

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.kobic.bioexpress.db.dto.log.JobLogDto">
+
+	<parameterMap type="org.kobic.bioexpress.model.log.JobLogModel" id="job_log"></parameterMap>
+	<parameterMap type="org.kobic.bioexpress.model.log.JobDetailLogModel" id="job_detail_log"></parameterMap>
+	<parameterMap type="org.kobic.bioexpress.model.log.LogDataModel" id="log_data"></parameterMap>
+	<parameterMap type="org.kobic.bioexpress.model.log.JobResourceUsageLogDataModel" id="job_resource_usage_log_data"></parameterMap>
+	
+	<resultMap id="job_log_model" type="org.kobic.bioexpress.model.log.JobLogModel">
+		<result property="rawID"			column="RAW_ID" />
+		<result property="pipelineID"		column="PIPELINE_ID" />
+		<result property="nodeID"			column="NODE_ID" />
+		<result property="jobID"			column="JOB_ID" />
+		<result property="subTaskID"		column="SUB_TASK_ID" />
+		<result property="memberID"			column="MEMBER_ID" />
+		<result property="submissionTime" 	column="SUBMISSION_TIME" />
+		<result property="stderrPath" 	    column="STDERR_PATH" />
+		<result property="stdoutPath" 		column="STDOUT_PATH" />
+		<result property="scriptFile" 	    column="SCRIPT_FILE" />
+	</resultMap>
+	
+	<resultMap id="job_detail_log_model" type="org.kobic.bioexpress.model.log.JobDetailLogModel">
+		<result property="rawID" 		    column="RAW_ID" />
+		<result property="nodeID" 	        column="NODE_ID" />
+		<result property="jobNumber" 	    column="JOB_NUMBER" />
+		<result property="execFile" 	    column="EXEC_FILE" />
+		<result property="submissionTime" 	column="SUBMISSION_TIME" />
+		<result property="owner" 			column="OWNER" />
+		<result property="uid" 		    	column="UID" />
+		<result property="userGroup" 		column="USER_GROUP" />
+		<result property="gid"       		column="GID" />
+		<result property="sgeHome" 		    column="SGE_HOME" />
+		<result property="sgeLogName" 	    column="SGE_LOG_NAME" />
+		<result property="sgeShell" 	    column="SGE_SHELL" />
+		<result property="sgeWorkdir" 	    column="SGE_WORKDIR" />
+		<result property="sgeHost" 	    	column="SGE_HOST" />
+		<result property="account" 			column="ACCOUNT" />
+		<result property="stderrPathList" 	column="STDERR_PATH_LIST" />
+		<result property="stdoutPathList" 	column="STDOUT_PATH_LIST" />
+		<result property="hardQueueList"    column="HARD_QUEUE_LIST" />
+		<result property="jobName"       	column="JOB_NAME" />
+		<result property="shellList" 	    column="SHELL_LIST" />
+		<result property="jobArgs" 	        column="JOB_ARGS" />
+		<result property="scriptFile" 		column="SCRIPT_FILE" />
+		<result property="timeStamp" 		column="TIME_STAMP" />
+	</resultMap>
+	
+	<resultMap id="log_data_model" type="org.kobic.bioexpress.model.log.LogDataModel">
+		<result property="rawID"		column="RAW_ID" />
+		<result property="nodeID"		column="NODE_ID" />
+		<result property="jobID"		column="JOB_ID" />
+		<result property="endTime" 	    column="END_TIME" />
+		<result property="stdout" 	    column="STDOUT" />
+		<result property="stderr" 		column="STDERR" />
+	</resultMap>
+	
+	<resultMap id="job_resource_usage_log_data_model" type="org.kobic.bioexpress.model.log.JobResourceUsageLogDataModel">
+		<result property="rawID"		column="RAW_ID" />
+		<result property="nodeID"		column="NODE_ID" />
+		<result property="jobID"		column="JOB_ID" />
+		<result property="cpu" 	    	column="CPU" />
+		<result property="mem" 	    	column="MEM" />
+		<result property="io" 			column="IO" />
+		<result property="vmem" 	    column="VMEM" />
+		<result property="maxvmem" 		column="MAXVMEM" />
+		<result property="timeStamp" 	column="TIME_STAMP" />
+		<result property="memberID" 	column="MEMBER_ID" />
+		<result property="pipelineID" 	column="PIPELINE_ID" />
+	</resultMap>
+
+	<insert id="insertJobLog" parameterMap="job_log">
+		UPSERT INTO
+			BX_JOB_LOG_TABLE(
+				RAW_ID, PIPELINE_ID, NODE_ID, JOB_ID,
+				SUB_TASK_ID, MEMBER_ID,	SUBMISSION_TIME,
+				STDERR_PATH, STDOUT_PATH, SCRIPT_FILE
+			)
+			VALUES(
+				#{rawID}, #{pipelineID}, #{nodeID}, #{jobID}, 
+				#{subTaskID}, #{memberID}, #{submissionTime}, 
+				#{stderrPath}, #{stdoutPath}, #{scriptFile}
+			)
+	</insert>
+	
+	<insert id="insertJobDetailLog" parameterMap="job_detail_log">
+		UPSERT INTO
+			BX_JOB_DETAIL_LOG_TABLE(
+				RAW_ID, NODE_ID, JOB_NUMBER,
+				EXEC_FILE, SUBMISSION_TIME, OWNER,
+				UID, USER_GROUP, GID,
+				SGE_HOME, SGE_LOG_NAME, SGE_SHELL,
+				SGE_WORKDIR, SGE_HOST, ACCOUNT,
+				STDERR_PATH_LIST, STDOUT_PATH_LIST, HARD_QUEUE_LIST,
+				JOB_NAME, SHELL_LIST, JOB_ARGS,
+				SCRIPT_FILE, TIME_STAMP
+			)
+			VALUES(
+				#{rawID}, #{nodeID}, #{jobNumber},
+				#{execFile}, #{submissionTime}, #{owner},
+				#{uid},	#{userGroup}, #{gid},
+				#{sgeHome},	#{sgeLogName}, #{sgeShell},
+				#{sgeWorkdir}, #{sgeHost}, #{account},
+				#{stderrPathList},	#{stdoutPathList}, #{hardQueueList},
+				#{jobName},	#{shellList}, #{jobArgs},
+				#{scriptFile}, #{timeStamp}
+			)
+	</insert>
+	
+	<insert id="insertLogData" parameterMap="log_data">
+		UPSERT INTO
+			BX_LOG_DATA_TABLE(<!--  -->
+				RAW_ID, NODE_ID, JOB_ID,
+				END_TIME, STDOUT, STDERR
+			)
+			VALUES(
+				#{rawID}, #{nodeID}, #{jobID}, 
+				#{endTime}, #{stdout}, #{stderr}
+			)
+	</insert>
+
+	<insert id="insertJobResourceUsageLogData" parameterMap="job_resource_usage_log_data">
+		UPSERT INTO
+			BX_JOB_RESOURCE_USAGE_LOG_DATA_TABLE(
+				RAW_ID, NODE_ID, JOB_ID,
+				CPU, MEM, IO,
+				VMEM, MAXVMEM, TIME_STAMP,
+				MEMBER_ID, PIPELINE_ID
+			)
+			VALUES(
+				#{rawID}, #{nodeID}, #{jobID}, 
+				#{cpu}, #{mem}, #{io},
+				#{vmem}, #{maxvmem}, #{timeStamp},
+				#{memberID}, #{pipelineID}
+			)
+	</insert>
+	
+	<select id="getJobLogData" resultMap="job_log_model" parameterType="map">
+		SELECT * FROM BX_JOB_LOG_TABLE WHERE NODE_ID = #{nodeID} AND JOB_ID = #{jobID}
+	</select>
+	
+	<select id="getAllJobLogData" resultMap="job_log_model" parameterType="string">
+		SELECT * FROM BX_JOB_LOG_TABLE WHERE SUB_TASK_ID = #{subTaskID}
+	</select>
+	
+	<select id="getJobIDWithPipelineID" resultType="java.lang.String" parameterType="string">
+		SELECT JOB_ID FROM BX_JOB_LOG_TABLE WHERE PIPELINE_ID = #{pipelineID}
+	</select>
+	
+	<select id="getJobIDWithNodeID" resultType="java.lang.String" parameterType="string">
+		SELECT JOB_ID FROM BX_JOB_LOG_TABLE WHERE NODE_ID = #{nodeID}
+	</select>
+	
+	<select id="getJobLogHistoryData" resultMap="job_log_model" parameterType="string">
+		SELECT * FROM BX_JOB_LOG_TABLE WHERE NODE_ID = #{nodeID}
+	</select>
+	
+	<select id="getJobDetailLogData" resultMap="job_detail_log_model" parameterType="map">
+		SELECT * FROM BX_JOB_DETAIL_LOG_TABLE WHERE NODE_ID = #{nodeID} AND JOB_NUMBER = #{jobNumber}
+	</select>
+
+	<select id="getLogData" resultMap="log_data_model" parameterType="map">
+		SELECT * FROM BX_LOG_DATA_TABLE WHERE NODE_ID = #{nodeID} AND JOB_ID = #{jobID}
+	</select>
+	
+	<select id="getJobResourceUsageLogData" resultMap="job_resource_usage_log_data_model" parameterType="map">
+		SELECT * FROM BX_JOB_RESOURCE_USAGE_LOG_DATA_TABLE WHERE NODE_ID = #{nodeID} AND JOB_ID = #{jobID}
+	</select>
+	
+</mapper>

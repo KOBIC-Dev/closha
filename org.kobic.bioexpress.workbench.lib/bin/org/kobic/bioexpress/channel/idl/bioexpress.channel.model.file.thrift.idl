@@ -1,0 +1,36 @@
+namespace java org.kobic.bioexpress.model.file
+
+/**
+ *  bool        Boolean, one byte
+ *  byte        Signed byte
+ *  i16         Signed 16-bit integer
+ *  i32         Signed 32-bit integer
+ *  i64         Signed 64-bit integer
+ *  double      64-bit floating point value
+ *  string      String
+ *  map<t1,t2>  Map from one type to another
+ *  list<t1>    Ordered list of one type
+ *  set<t1>     Set of unique elements of one type
+ *
+ */
+
+typedef i32 int, 
+typedef i64 long
+typedef bool boolean
+
+struct FileModel{
+	1:string rawID = "NA";
+	2:string name = "NA";
+	3:string path = "NA";
+	4:string parentPath = "NA";
+	5:string extension = "NA";
+	6:string createDate = "NA";
+	7:string modifiedDate = "NA";
+	8:string accessDate = "NA";
+	9:long size = 0;
+	10:boolean isFile = false;
+	11:boolean isDir = false;
+	12:boolean isSub = false;
+	13:boolean isHidden = false;
+	14:boolean isSymbol = false;
+}

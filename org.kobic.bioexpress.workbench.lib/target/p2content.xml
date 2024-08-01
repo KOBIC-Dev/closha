@@ -1,0 +1,209 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<units size='2'>
+  <unit id='org.kobic.bioexpress.workbench.lib' version='2.0.0' singleton='false' generation='2'>
+    <update id='org.kobic.bioexpress.workbench.lib' range='[0.0.0,2.0.0)' severity='0'/>
+    <properties size='5'>
+      <property name='org.eclipse.equinox.p2.name' value='org.kobic.bioexpress.workbench.lib'/>
+      <property name='maven-groupId' value='org.kobic.bioexpress.workbench'/>
+      <property name='maven-artifactId' value='org.kobic.bioexpress.workbench.lib'/>
+      <property name='maven-version' value='2.0.0'/>
+      <property name='maven-type' value='eclipse-plugin'/>
+    </properties>
+    <provides size='135'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='org.kobic.bioexpress.workbench.lib' version='2.0.0'/>
+      <provided namespace='osgi.bundle' name='org.kobic.bioexpress.workbench.lib' version='2.0.0'/>
+      <provided namespace='java.package' name='me.friwi.jcefmaven' version='0.0.0'/>
+      <provided namespace='java.package' name='me.friwi.jcefmaven.impl.platform' version='0.0.0'/>
+      <provided namespace='java.package' name='me.friwi.jcefmaven.impl.progress' version='0.0.0'/>
+      <provided namespace='java.package' name='me.friwi.jcefmaven.impl.step.check' version='0.0.0'/>
+      <provided namespace='java.package' name='me.friwi.jcefmaven.impl.step.extract' version='0.0.0'/>
+      <provided namespace='java.package' name='me.friwi.jcefmaven.impl.step.fetch' version='0.0.0'/>
+      <provided namespace='java.package' name='me.friwi.jcefmaven.impl.step.init' version='0.0.0'/>
+      <provided namespace='java.package' name='me.friwi.jcefmaven.impl.util' version='0.0.0'/>
+      <provided namespace='java.package' name='me.friwi.jcefmaven.impl.util.macos' version='0.0.0'/>
+      <provided namespace='java.package' name='me.friwi.jcefsampleapp' version='0.0.0'/>
+      <provided namespace='java.package' name='org.cef' version='0.0.0'/>
+      <provided namespace='java.package' name='org.cef.browser' version='0.0.0'/>
+      <provided namespace='java.package' name='org.cef.callback' version='0.0.0'/>
+      <provided namespace='java.package' name='org.cef.handler' version='0.0.0'/>
+      <provided namespace='java.package' name='org.cef.misc' version='0.0.0'/>
+      <provided namespace='java.package' name='org.cef.network' version='0.0.0'/>
+      <provided namespace='java.package' name='org.json' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.bpm' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.bpm.node' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.bpm.pipeline' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.client' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.client.category' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.client.closha' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.client.cluster' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.client.core' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.client.podman' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.client.factory' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.client.file' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.client.gbox' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.client.log' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.client.pipeline' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.client.program' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.client.regist' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.client.script' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.client.task' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.client.workspace' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.launcher' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.service' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.service.closha' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.service.cluster' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.service.db' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.service.podman' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.service.file' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.service.regist' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.service.sso' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.service.task' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.channel.utils' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.db' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.db.client' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.db.dto.category' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.db.dto.ddl' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.db.dto.podman' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.db.dto.gbox' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.db.dto.log' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.db.dto.pipeline' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.db.dto.program' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.db.dto.script' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.db.dto.task' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.db.dto.workspace' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.db.factory' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.db.handler' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.db.service.category' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.db.service.ddl' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.db.service.podman' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.db.service.gbox' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.db.service.log' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.db.service.pipeline' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.db.service.program' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.db.service.task' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.db.service.workspace' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.db.utils' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.gbox' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.gbox.local' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.gbox.rapidant' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.gbox.rapidant.handler' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.gbox.utils' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.grid.engine.handler' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.model.admin' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.model.category' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.model.cluster' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.model.common' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.model.es' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.model.podman' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.model.file' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.model.gbox' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.model.log' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.model.parameter' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.model.pipeline' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.model.program' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.model.raonwiz' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.model.rcp' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.model.script' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.model.sso' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.model.task' version='0.0.0'/>
+      <provided namespace='java.package' name='org.kobic.bioexpress.model.workspace' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.common.consts' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.common.encrypt' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.common.util' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.file.logs' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.file.xml' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.license' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.client' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.client.api' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.client.event' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.client.file' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.client.message' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.client.message.receive' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.client.message.send' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.client.service' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.common.compress' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.consts' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.exception' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.file' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.http.data' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.message' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.meta.info' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.monitor' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.resource' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.server.file' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.server.message' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.server.message.object' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.server.message.status' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.server.service' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.service' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.update' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.update.command' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.web.http' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.web.http.api' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.web.https' version='0.0.0'/>
+      <provided namespace='java.package' name='raonwiz.k.livepass.worker' version='0.0.0'/>
+      <provided namespace='osgi.identity' name='org.kobic.bioexpress.workbench.lib' version='2.0.0'>
+        <properties size='1'>
+          <property name='type' value='osgi.bundle'/>
+        </properties>
+      </provided>
+      <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+    </provides>
+    <requires size='1'>
+      <requiredProperties namespace='osgi.ee' match='(&amp;(osgi.ee=JavaSE)(version=1.8))'>
+        <description>
+          org.kobic.bioexpress.workbench.lib
+        </description>
+      </requiredProperties>
+    </requires>
+    <artifacts size='1'>
+      <artifact classifier='osgi.bundle' id='org.kobic.bioexpress.workbench.lib' version='2.0.0'/>
+    </artifacts>
+    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='1'>
+        <instruction key='manifest'>
+          Bundle-SymbolicName: org.kobic.bioexpress.workbench.lib&#xA;Bundle-Version: 2.0.0&#xA;
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+  <unit id='org.kobic.bioexpress.workbench.lib.source' version='2.0.0' singleton='false'>
+    <update id='org.kobic.bioexpress.workbench.lib.source' range='[0.0.0,2.0.0)' severity='0'/>
+    <properties size='10'>
+      <property name='df_LT.bundleVendor' value='unknown'/>
+      <property name='df_LT.bundleName' value='org.kobic.bioexpress.workbench.lib Source'/>
+      <property name='org.eclipse.equinox.p2.name' value='%bundleName'/>
+      <property name='org.eclipse.equinox.p2.provider' value='%bundleVendor'/>
+      <property name='org.eclipse.equinox.p2.bundle.localization' value='OSGI-INF/l10n/bundle-src'/>
+      <property name='maven-groupId' value='org.kobic.bioexpress.workbench'/>
+      <property name='maven-artifactId' value='org.kobic.bioexpress.workbench.lib'/>
+      <property name='maven-version' value='2.0.0'/>
+      <property name='maven-classifier' value='sources'/>
+      <property name='maven-type' value='java-source'/>
+    </properties>
+    <provides size='5'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='org.kobic.bioexpress.workbench.lib.source' version='2.0.0'/>
+      <provided namespace='osgi.bundle' name='org.kobic.bioexpress.workbench.lib.source' version='2.0.0'/>
+      <provided namespace='osgi.identity' name='org.kobic.bioexpress.workbench.lib.source' version='2.0.0'>
+        <properties size='1'>
+          <property name='type' value='osgi.bundle'/>
+        </properties>
+      </provided>
+      <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='source' version='1.0.0'/>
+      <provided namespace='org.eclipse.equinox.p2.localization' name='df_LT' version='1.0.0'/>
+    </provides>
+    <artifacts size='1'>
+      <artifact classifier='osgi.bundle' id='org.kobic.bioexpress.workbench.lib.source' version='2.0.0'/>
+    </artifacts>
+    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='1'>
+        <instruction key='manifest'>
+          Bundle-SymbolicName: org.kobic.bioexpress.workbench.lib.source&#xA;Bundle-Version: 2.0.0&#xA;
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+</units>

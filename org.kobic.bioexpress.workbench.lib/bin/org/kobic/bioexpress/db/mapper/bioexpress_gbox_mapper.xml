@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="org.kobic.bioexpress.db.dto.gbox.GBoxDto">
+
+	<parameterMap
+		type="org.kobic.bioexpress.model.gbox.GBoxFileHistoryLogModel"
+		id="gbox_file_history_log"></parameterMap>
+
+	<resultMap id="gbox_file_history_log_model" type="org.kobic.bioexpress.model.gbox.GBoxFileHistoryLogModel">
+		<result property="rawID" 			column="RAW_ID" />
+		<result property="memberID" 		column="MEMBER_ID" />
+		<result property="eventType" 		column="EVENT_TYPE" />
+		<result property="name" 			column="NAME" />
+		<result property="sourcePath" 		column="SOURCE_PATH" />
+		<result property="targetPath" 		column="TARGET_PATH" />
+		<result property="submissionTime" 	column="SUBMISSION_TIME" />
+		<result property="isFile" 			column="IS_FILE" />
+		<result property="isDir" 			column="IS_DIR" />
+	</resultMap>
+	
+	<insert id="insertGBoxFileHistoryLogModel" parameterMap="gbox_file_history_log">
+		UPSERT INTO
+			BX_GBOX_FILE_HISTORY_LOG_TABLE(
+				RAW_ID, MEMBER_ID, EVENT_TYPE,
+				NAME, SOURCE_PATH, TARGET_PATH,
+				SUBMISSION_TIME, IS_FILE, IS_DIR
+			)
+			VALUES(
+				#{rawID}, #{memberID}, #{eventType},
+				#{name}, #{sourcePath}, #{targetPath},
+				#{submissionTime},	#{isFile}, #{isDir}
+			)
+	</insert>
+	
+</mapper>

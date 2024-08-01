@@ -1,0 +1,38 @@
+namespace java org.kobic.bioexpress.model.category
+
+/**
+ *  bool        Boolean, one byte
+ *  byte        Signed byte
+ *  i16         Signed 16-bit integer
+ *  i32         Signed 32-bit integer
+ *  i64         Signed 64-bit integer
+ *  double      64-bit floating point value
+ *  string      String
+ *  map<t1,t2>  Map from one type to another
+ *  list<t1>    Ordered list of one type
+ *  set<t1>     Set of unique elements of one type
+ *
+ */
+
+typedef i32 int, 
+typedef i64 long
+typedef bool boolean
+
+struct CategoryModel{
+	1:string rawID = "NA";
+	2:string categoryID = "NA";
+	3:string categoryName = "NA";
+	4:string categoryDesc = "NA";
+	5:string parentID = "NA";
+	6:string memberID = "NA";
+	7:string createDate = "NA";
+	8:string updateDate = "NA";
+	9:string deleteDate = "NA";
+	10:int objectCount = 0;
+	11:boolean isRoot = false;
+	12:boolean isPublic = false;
+	13:boolean isAdmin = false;
+	14:boolean isDelete = false;
+	15:boolean isPipeline = false;
+	16:boolean isProgram = false;
+}

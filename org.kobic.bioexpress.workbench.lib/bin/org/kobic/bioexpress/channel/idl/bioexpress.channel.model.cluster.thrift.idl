@@ -1,0 +1,47 @@
+namespace java org.kobic.bioexpress.model.cluster
+
+/**
+ *  bool        Boolean, one byte
+ *  byte        Signed byte
+ *  i16         Signed 16-bit integer
+ *  i32         Signed 32-bit integer
+ *  i64         Signed 64-bit integer
+ *  double      64-bit floating point value
+ *  string      String
+ *  map<t1,t2>  Map from one type to another
+ *  list<t1>    Ordered list of one type
+ *  set<t1>     Set of unique elements of one type
+ *
+ */
+
+typedef i32 int, 
+typedef i64 long
+typedef bool boolean
+
+struct GridHostModel{
+
+	1:string rawID = "NA";
+	2:string host = "NA";
+	3:string load = "NA";
+	4:string cpu = "NA";
+	5:string memTo = "NA";
+	6:string memUse = "NA";
+	7:string disk = "NA";
+	8:string cache = "NA";
+	9:string swapTo = "NA";
+	10:string swapUse = "NA";
+	11:string time = "NA";
+
+}
+
+struct GridStatModel{
+
+	1:string queue = "NA";
+	2:string slots = "NA";
+	3:string jobID = "NA";
+	4:string name = "NA";
+	5:string priority = "NA";
+	6:string state = "NA";
+	7:string submissionDate = "NA";
+
+}

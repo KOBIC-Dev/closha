@@ -1,0 +1,73 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>org.kobic.bioexpress.workbench.lib</artifactId>
+	<packaging>eclipse-plugin</packaging>
+
+	<parent>
+		<groupId>org.kobic.bioexpress.workbench</groupId>
+		<artifactId>org.kobic.bioexpress.workbench.parent</artifactId>
+		<version>2.0.0</version>
+		<relativePath>../org.kobic.bioexpress.workbench.parent</relativePath>
+	</parent>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.10</version>
+				<executions>
+					<execution>
+						<id>copy-libraries</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<item>
+									<groupId>org.kobic.bioexpress.workbench</groupId>
+									<artifactId>org.kobic.bioexpress.lib</artifactId>
+									<version>2.0.0</version>
+									<classifier>jar-with-dependencies</classifier>
+									<overWrite>true</overWrite>
+									<outputDirectory>lib</outputDirectory>
+									<destFileName>org.kobic.bioexpress.lib.jar</destFileName>
+								</item>
+								<item>
+									<groupId>org.kobic.bioexpress.workbench</groupId>
+									<artifactId>org.kobic.bioexpress.model</artifactId>
+									<version>2.0.0</version>
+								</item>
+								<item>
+									<groupId>org.kobic.bioexpress.workbench</groupId>
+									<artifactId>org.kobic.bioexpress.gbox</artifactId>
+									<version>2.0.0</version>
+								</item>
+								<item>
+									<groupId>org.kobic.bioexpress.workbench</groupId>
+									<artifactId>org.kobic.bioexpress.db</artifactId>
+									<version>2.0.0</version>
+								</item>
+								<item>
+									<groupId>org.kobic.bioexpress.workbench</groupId>
+									<artifactId>org.kobic.bioexpress.channel</artifactId>
+									<version>2.0.0</version>
+								</item>
+							</artifactItems>
+							<outputDirectory>lib</outputDirectory>
+							<stripVersion>true</stripVersion>
+							<overWriteReleases>true</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

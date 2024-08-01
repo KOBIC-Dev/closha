@@ -1,0 +1,31 @@
+include "bioexpress.channel.model.script.thrift.idl"
+
+namespace java org.kobic.bioexpress.channel.service.db
+
+/**
+ *  bool        Boolean, one byte
+ *  byte        Signed byte
+ *  i16         Signed 16-bit integer
+ *  i32         Signed 32-bit integer
+ *  i64         Signed 64-bit integer
+ *  double      64-bit floating point value
+ *  string      String
+ *  map<t1,t2>  Map from one type to another
+ *  list<t1>    Ordered list of one type
+ *  set<t1>     Set of unique elements of one type
+ */
+
+typedef i32 int, 
+typedef i64 long
+typedef bool boolean
+
+typedef bioexpress.channel.model.script.thrift.ScriptModel scriptModel
+
+service BioExScriptDBService{
+
+	int insertScript(1:scriptModel scriptModel),
+	scriptModel getSelectScript(1:string memberID, 2:string savePath, 3:string name),
+	int deleteScript(1:list<string> paths),
+	int updateScript(1:string rawID, 2:scriptModel scriptModel),
+	bool isExistScript(1:string memberID, 2:string savePath, 3:string name),
+}

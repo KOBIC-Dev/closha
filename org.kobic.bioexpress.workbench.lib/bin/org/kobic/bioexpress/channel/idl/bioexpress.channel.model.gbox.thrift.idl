@@ -1,0 +1,73 @@
+namespace java org.kobic.bioexpress.model.gbox
+
+/**
+ *  bool        Boolean, one byte
+ *  byte        Signed byte
+ *  i16         Signed 16-bit integer
+ *  i32         Signed 32-bit integer
+ *  i64         Signed 64-bit integer
+ *  double      64-bit floating point value
+ *  string      String
+ *  map<t1,t2>  Map from one type to another
+ *  list<t1>    Ordered list of one type
+ *  set<t1>     Set of unique elements of one type
+ *
+ */
+
+typedef i32 int, 
+typedef i64 long
+typedef bool boolean
+
+struct TransferLogModel {
+
+	1:string rawID = "NA";
+	2:string name = "NA";
+ 	3:string max = "NA";
+ 	4:string percent = "NA";
+ 	5:string speed = "NA";
+    6:string totalSize = "NA";
+ 	7:string transferSize = "NA";
+}
+
+struct GBoxFileHistoryLogModel{
+
+	1:string rawID;
+	2:string memberID;
+	3:string eventType;
+	4:string name;
+	5:string sourcePath;
+	6:string targetPath;
+	7:string submissionTime;
+	8:boolean isFile = false;
+	9:boolean isDir = false;
+}
+
+struct RapidantMonitoringModel{
+
+	1:string userID;
+	2:string maxSpeed;
+	3:string mode;
+	4:string protocol;
+	5:string destFile;
+	6:string conTime;
+	7:string clientIP;
+	8:string filename;
+	9:string fileSize;
+	10:string transferedSize;
+	11:string receivedByte;
+	12:string transferedSpeed;
+	13:string status;
+	14:string elapsedTime;
+	15:string fileID;
+	16:string compressMode;
+	17:string commanderID;
+	18:string name;
+	19:string groupName;
+	20:string noOfStream;
+	21:string sessionID;
+	22:string message;
+	23:string sourceStorageType;
+	24:string sourceStorageAuth;
+	25:string targetStorageType;
+	26:string targetStorageAuth;
+}
