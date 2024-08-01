@@ -10,7 +10,7 @@ CLOSHA is a an open source software developed by the Korean Bioinformation Cente
 easily analyze NGS data. 
 
 <p align="center">
-![그림1](https://github.com/user-attachments/assets/a9519b8e-3059-49cf-9855-ebec8388a6e0)
+<img width="769" alt="image" src="https://github.com/user-attachments/assets/68a73431-2569-47ce-9d1c-e8490a86ac1c">
 </p>
 
 <p align="center">
