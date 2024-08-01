@@ -14,5 +14,5 @@ easily analyze NGS data.
 </p>
 
 <p align="center">
-![그림2](https://github.com/user-attachments/assets/161cef0b-ab03-4e9a-80ca-196cb5d55eda)
+<img width="769" alt="image" src="https://github.com/user-attachments/assets/161cef0b-ab03-4e9a-80ca-196cb5d55eda">
 </p>
