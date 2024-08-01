@@ -13,7 +13,7 @@ easily analyze NGS data.
 
 </br>
 <p align="center">
-<img width="969" alt="image" src="https://github.com/user-attachments/assets/55d20f65-a183-4331-8e55-306d7cfcad11">
+<img width="969" alt="image" src="https://github.com/user-attachments/assets/e9ef8864-a1ac-4827-9026-1e2f5cd57ef3">
 </p>
 </br>
 
