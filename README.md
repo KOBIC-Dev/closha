@@ -12,6 +12,7 @@ easily analyze NGS data.
 <p align="center">
 <img width="769" alt="image" src="https://github.com/user-attachments/assets/68a73431-2569-47ce-9d1c-e8490a86ac1c">
 </p>
+Composition of HPC-Cloud-Based CLOSHA2.0 System. Previous constructed system has difficult in analyzing massive dielectric date, CLOSHA2.0 system constructed system that enables you to the massive dielectric date analysis. Even though it is complicated and various conditions, it has tried to demonstrate optimum performance through user install CLOSHA2.0　program and organic connection of workbench, it obtains contents of analysis service workflow and tries to offer various analysis workflow to numerous researchers.
 
 <p align="center">
 <img width="769" alt="image" src="https://github.com/user-attachments/assets/161cef0b-ab03-4e9a-80ca-196cb5d55eda">
