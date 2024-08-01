@@ -5,5 +5,6 @@ Recent advances in various computational algorithms for high-throughput sequenci
 
 CLOSHA is a an open source software developed by the Korean Bioinformation Center (KOBIC) that provides an easy-to-use workflow for next-generation sequence (NGS) data. CLOSHA2.0 has several pipelines to analyze each NGS data. Using these pipelines provided by CLOSHA2.0, even scientists with a little computer programming experience can easily analyze NGS data. 
 
-
+<p align="center">
 <img width="788" alt="image" src="https://github.com/user-attachments/assets/b7d7f859-27fa-4c17-b94f-03aea3195273">
+</p>
