@@ -18,3 +18,7 @@ Composition of HPC-Cloud-Based CLOSHA2.0 System. Previous constructed system has
 <p align="center">
 <img width="769" alt="image" src="https://github.com/user-attachments/assets/161cef0b-ab03-4e9a-80ca-196cb5d55eda">
 </p>
+
+Closha 2.0 supports container-based analysis execution, allowing analytical tools to run independently within containers. This prevents dependency issues and conflicts between different tools. As a result, multiple versions of the same tool can be executed in the same environment, maintaining the independence of analytical tool execution. Additionally, containers provide a consistent execution environment, ensuring the reproducibility of analysis tasks. The container-based architecture is easily scalable in a cluster environment, making it suitable for large-scale data processing. This enhances both scalability and reproducibility. Containers can run on various cloud platforms and on-premise environments, increasing the compatibility and portability of the analysis pipeline. This flexibility allows users to perform analysis tasks without being tied to a specific infrastructure.
+
+These features significantly contribute to Closha 2.0 evolving into a more efficient and stable analysis platform.
