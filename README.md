@@ -50,14 +50,16 @@ Please consult the [tutorial](https://kobic.re.kr/closha2/howtouse) for a detail
 
 ## System Architecture
 <p align="center">
-<img width="969" alt="image" src="https://github.com/user-attachments/assets/e9ef8864-a1ac-4827-9026-1e2f5cd57ef3">
+<img width="969" alt="image" src="https://github.com/user-attachments/assets/d7f84f30-926b-4cfa-aaa5-4190396743ca">
+
 </p>
 Composition of HPC-Cloud-Based CLOSHA2.0 System. Previous constructed system has difficult in analyzing massive dielectric date, CLOSHA2.0 system constructed system that enables you to the massive dielectric date analysis. Even though it is complicated and various conditions, it has tried to demonstrate optimum performance through user install CLOSHA2.0　program and organic connection of workbench, it obtains contents of analysis service workflow and tries to offer various analysis workflow to numerous researchers.
 </br>
 
 </br>
 <p align="center">
-<img width="969" alt="image" src="https://github.com/user-attachments/assets/161cef0b-ab03-4e9a-80ca-196cb5d55eda">
+<img width="969" alt="image" src="https://github.com/user-attachments/assets/5b6fb746-8b43-4d31-9b99-8aca9495f834">
+
 </p>
 Closha 2.0 supports container-based analysis execution, allowing analytical tools to run independently within containers. This prevents dependency issues and conflicts between different tools. As a result, multiple versions of the same tool can be executed in the same environment, maintaining the independence of analytical tool execution. Additionally, containers provide a consistent execution environment, ensuring the reproducibility of analysis tasks. The container-based architecture is easily scalable in a cluster environment, making it suitable for large-scale data processing. This enhances both scalability and reproducibility. Containers can run on various cloud platforms and on-premise environments, increasing the compatibility and portability of the analysis pipeline. This flexibility allows users to perform analysis tasks without being tied to a specific infrastructure.
 
