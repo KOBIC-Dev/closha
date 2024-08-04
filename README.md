@@ -53,7 +53,7 @@ Please consult the [tutorial](https://kobic.re.kr/closha2/howtouse) for a detail
 <img width="969" alt="image" src="https://github.com/user-attachments/assets/d7f84f30-926b-4cfa-aaa5-4190396743ca">
 
 </p>
-Composition of HPC-Cloud-Based CLOSHA2.0 System. Previous constructed system has difficult in analyzing massive dielectric date, CLOSHA2.0 system constructed system that enables you to the massive dielectric date analysis. Even though it is complicated and various conditions, it has tried to demonstrate optimum performance through user install CLOSHA2.0　program and organic connection of workbench, it obtains contents of analysis service workflow and tries to offer various analysis workflow to numerous researchers.
+Composition of HPC-Cloud-Based CLOSHA2.0 System. Previous constructed system has difficult in analyzing massive dielectric date, CLOSHA2.0 system constructed system that enables you to the massive dielectric date analysis. Even though it is complicated and various conditions, it has tried to demonstrate optimum performance through user install CLOSHA2.0 program and organic connection of workbench, it obtains contents of analysis service workflow and tries to offer various analysis workflow to numerous researchers.
 </br>
 
 </br>
