@@ -40,6 +40,12 @@ Closha 2.0 is designed to enable researchers of all technical backgrounds to per
 * Integrated Workflow Management: Offers curated analysis pipelines and customizable workflows to meet diverse research needs.
 * Multi-Platform Support: Available for Linux, Windows, and Mac OSX, with installers that do not require administrator privileges.
 
+## Manual
+You can download the Closha 2.0 manual for detailed instructions on how to install, configure, and use the software. The manual provides comprehensive guidance on utilizing all features of Closha 2.0, including setting up workflows, registering custom scripts, and leveraging advanced tools for genomic analysis.
+
+Download the Closha2.0 Manual: [Closha 2.0 Manual (PDF)](https://github.com/user-attachments/files/16503699/CLOSHA2.0_manual.pdf)
+
+
 ## Tutorial
 Please consult the [tutorial](https://kobic.re.kr/closha2/howtouse) for a detailed step-by-step guide on how to use Closha 2.0.
 
